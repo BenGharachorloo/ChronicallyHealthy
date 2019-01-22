@@ -7,11 +7,11 @@ function MACD(weightVector) {
 
 var threshold = 1;
 
-var weightVector = [70,70,70,70,70,70,70,70,70, 70.5, 71, 72, 73.1]; //will replace with weight data from scale
+var weightVector = [50,70,70,70,70,70,70,70,70, 70.5, 71, 72, 73.1]; //will replace with weight data from scale
 
 //MACD
 document.write("CALCULATING WEIGHT TRENDS.");
-"bleep bloop"
+
 var result = MACD(weightVector);
 
 if (result > threshold)
