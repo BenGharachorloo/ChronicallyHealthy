@@ -14,7 +14,7 @@ var weightVector = [70,70,70,70,70,70,70,70,70, 70.5, 71, 72, 73.1]; //will repl
 var result = MACD(weightVector);
 
 if (result > threshold)
-  "UH OH! Something is wrong! Please see a doctor."
+  document.write("UH OH! Something is wrong! Please see a doctor.");
 else
- "You're safe."
+  document.write("You're safe.");
   
