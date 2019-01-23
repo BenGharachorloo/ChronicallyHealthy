@@ -1,3 +1,20 @@
+ body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: green;
+  margin-left: 20px;
+}
+
+p {
+  color: red;
+  margin-left: 20px;
+}
+
+
+
+
 canvas {
     padding-left: 0;
     padding-right: 0;
