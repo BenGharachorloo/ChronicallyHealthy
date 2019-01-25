@@ -19,7 +19,15 @@ var ctx = c.getContext("2d");
 ctx.moveTo(0,400);
 ctx.lineTo(800,0);
 ctx.stroke();
+  
+  
+  
+  
+  var i;
+  for(i = 100; i < 1000; i = i + 200){
+    ctx.beginPath();
+    ctx.arc(i, 75, 20, 0, 2 * Math.PI);
+    ctx.fillStyle = "blue";
+    ctx.fill();
+}
 </script>
-
-
-
