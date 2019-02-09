@@ -1,3 +1,4 @@
+<script>
 function MACD(weightVector) {
  //PARAMS:
  var NS = 1;
@@ -236,9 +237,9 @@ for (var coord in sickCoords) {
     		for(var weight = 0; weight < numWeightAvgs; weight++){
         
                 if(healthyVector[weight][trial][noise] == -1)
-                	trialTypeNoiseSick[trial]++;
+                	trialTypeNoiseSick[trial][noise]++;
                 else
-                	trialTypeNoiseHealthy[trial]++;
+                	trialTypeNoiseHealthy[trial][noise]++;
 			}
         }
         	
@@ -263,6 +264,11 @@ for (var coord in sickCoords) {
         	
 	}
 
+  	var trialTypeNames = ["healthy constant", "increasing unhealthy acc to study", "increasing unhealthy acc to last 14 days of study (largest increase)",
+  "increasing with + 1", "increasing acc to last 14 days of study w + 1", "decreasing Quickly","decreasing slowly"]
+	
+  	var avgWeights = [50, 55, 60,65,70,75,80,85,90,95,100];
+    var noiseMultipliers = [0.2,0.6,1.0,1.4];
 
   		document.write("<br>");
           		document.write("<br>");
@@ -275,6 +281,9 @@ document.write("RESULTS:");
                           		document.write("<br>");
 	//test against weight
     for(var weight = 0; weight < numWeightAvgs; weight++){  
+    	document.write(avgWeights[weight]);
+    	document.write("kg");
+        	document.write("<br>");
     	document.write("Healthy: ");
     	document.write(weightAvgHealthy[weight]);
     	document.write("   Sick: ");
@@ -287,8 +296,11 @@ document.write("RESULTS:");
           		document.write("<br>");
                   		document.write("<br>");
                           		document.write("<br>");
+                                
 	//test against trial types
     for(var trial = 0; trial < numTrialTypes; trial++){
+    	document.write(trialTypeNames[trial]);
+        	document.write("<br>");
     	document.write("Healthy: ");
     	document.write(trialTypeHealthy[trial]);
     	document.write("   Sick: ");
@@ -301,14 +313,24 @@ document.write("RESULTS:");
           		document.write("<br>");
                   		document.write("<br>");
                           		document.write("<br>");
-	//test against trial types    & noise                  
-    for(var trial = 0; trial < numTrialTypes; trial++){    
+                                
+	//test against trial types & noise                  noiseMultipliers
+	document.write("Healthy: ");
+    for(var trial = 0; trial < numTrialTypes; trial++){ 
+    	document.write(trialTypeNames[trial]);
+        	document.write("<br>");   
     	for(var noise = 0; noise < numNoiseTypes; noise++){
-    		document.write("Healthy: ");
     		document.write(trialTypeNoiseHealthy[trial][noise]);
-    		document.write("   Sick: ");
+        document.write("<br>");
+    	}
+    }
+    document.write("   Sick: ");
+    for(var trial = 0; trial < numTrialTypes; trial++){ 
+    	document.write(trialTypeNames[trial]);
+        	document.write("<br>");   
+    	for(var noise = 0; noise < numNoiseTypes; noise++){
     		document.write(trialTypeNoiseSick[trial][noise]);
-        	document.write("<br>");
+        document.write("<br>");
     	}
     }
 
