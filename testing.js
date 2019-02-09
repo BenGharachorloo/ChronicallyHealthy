@@ -1,5 +1,3 @@
-
-
 function MACD(weightVector) {
  //PARAMS:
  var NS = 1;
@@ -149,36 +147,40 @@ weightVector = test();
 
 var numHealthy = 0;
 var numSick = 0;
-var sickCoords = [];
+//var sickCoords = [];
+//var healthyCoords = [];
 
 //MACD
 document.write("CALCULATING WEIGHT TRENDS.");
-var coords = {w:0,t:0,n:0};
+//var coords = {w:0,t:0,n:0,healthy:0};
+	var healthyVector = new Array(numWeightAvgs);
 
-for(var weight = 0; weight < numWeightAvgs; weight++){
+    for(var weight = 0; weight < numWeightAvgs; weight++){
     
+    	healthyVector[weight] = new Array(numTrialTypes);        
     	for(var trial = 0; trial < numTrialTypes; trial++){
-                
+        
+    		healthyVector[weight][trial] = new Array(numNoiseTypes);            
     		for(var noise = 0; noise < numNoiseTypes; noise++){
             
   				var result = MACD(weightVector[weight][trial][noise]);
   				
                 if (result  > threshold){
                 	numSick ++;
-                    coords.w = weight;
-                    coords.t = trial;
-                    coords.n = noise;
-                    sickCoords.push(coords);
+                    healthyVector[weight][trial][noise] = -1;
                     
 				}
                 else{
                 	numHealthy ++;
+                    healthyVector[weight][trial][noise] = 1;
                 }
                 	
                 
 			}
 		}
 }
+
+
 
   		document.write("<br>");
 document.write("DONE CALCULATING WEIGHT TRENDS.");
@@ -190,15 +192,128 @@ document.write("numSick: ");
 document.write(numSick);
   		document.write("<br>");
         var output = '';
+/*
 for (var coord in sickCoords) {
   		output += coord + ': ' + sickCoords[coord]['w']+', ' + sickCoords[coord]['t']+', ' + sickCoords[coord]['n']+'; ';
 	
-}
+}//*/
   		document.write(output);
+
+    //sum all test cases
+    
+    //JUST TRIAL
+    var trialTypeHealthy = new Array(numTrialTypes);
+    var trialTypeSick = new Array(numTrialTypes);
+    for(var trial = 0; trial < numTrialTypes; trial++){
+        	trialTypeHealthy[trial] = 0; 
+        	trialTypeSick[trial] = 0;
+    
+    	for(var weight = 0; weight < numWeightAvgs; weight++){
+              
+    		for(var noise = 0; noise < numNoiseTypes; noise++){
+                if(healthyVector[weight][trial][noise] == -1)
+                	trialTypeSick[trial]++;
+                else
+                	trialTypeHealthy[trial]++;
+			}
+        }
+        	
+	}
+    
+    //TRIAL AND NOISE
+    
+    var trialTypeNoiseHealthy = new Array(numTrialTypes);
+    var trialTypeNoiseSick = new Array(numTrialTypes);
+    for(var trial = 0; trial < numTrialTypes; trial++){
+        trialTypeNoiseHealthy[trial] = new Array(numNoiseTypes);
+        trialTypeNoiseSick[trial] = new Array(numNoiseTypes);
+    
+    	for(var noise = 0; noise < numNoiseTypes; noise++){
+        	trialTypeNoiseHealthy[trial][noise] = 0; 
+        	trialTypeNoiseSick[trial][noise] = 0;
+        
+    
+    		for(var weight = 0; weight < numWeightAvgs; weight++){
+        
+                if(healthyVector[weight][trial][noise] == -1)
+                	trialTypeNoiseSick[trial]++;
+                else
+                	trialTypeNoiseHealthy[trial]++;
+			}
+        }
+        	
+	}
+    
+    
+    var weightAvgHealthy = new Array(numWeightAvgs);
+    var weightAvgSick = new Array(numWeightAvgs);
+    
+    for(var weight = 0; weight < numWeightAvgs; weight++){ 
+    	weightAvgHealthy[weight] = 0;
+        weightAvgSick[weight] = 0;
+    	for(var trial = 0; trial < numTrialTypes; trial++){
+    		for(var noise = 0; noise < numNoiseTypes; noise++){
+            
+                if(healthyVector[weight][trial][noise] == -1)
+                	weightAvgSick[weight]++;
+                else
+                	weightAvgHealthy[weight]++;
+			}
+        }
+        	
+	}
+
+
+  		document.write("<br>");
+          		document.write("<br>");
+                  		document.write("<br>");
+                          		document.write("<br>");
+document.write("RESULTS:");
+  		document.write("<br>");
+          		document.write("<br>");
+                  		document.write("<br>");
+                          		document.write("<br>");
+	//test against weight
+    for(var weight = 0; weight < numWeightAvgs; weight++){  
+    	document.write("Healthy: ");
+    	document.write(weightAvgHealthy[weight]);
+    	document.write("   Sick: ");
+    	document.write(weightAvgSick[weight]);
+        document.write("<br>");
+    }
+    
+    
+  		document.write("<br>");
+          		document.write("<br>");
+                  		document.write("<br>");
+                          		document.write("<br>");
+	//test against trial types
+    for(var trial = 0; trial < numTrialTypes; trial++){
+    	document.write("Healthy: ");
+    	document.write(trialTypeHealthy[trial]);
+    	document.write("   Sick: ");
+    	document.write(trialTypeSick[trial]);
+        document.write("<br>");
+    }
+
+
+  		document.write("<br>");
+          		document.write("<br>");
+                  		document.write("<br>");
+                          		document.write("<br>");
+	//test against trial types    & noise                  
+    for(var trial = 0; trial < numTrialTypes; trial++){    
+    	for(var noise = 0; noise < numNoiseTypes; noise++){
+    		document.write("Healthy: ");
+    		document.write(trialTypeNoiseHealthy[trial][noise]);
+    		document.write("   Sick: ");
+    		document.write(trialTypeNoiseSick[trial][noise]);
+        	document.write("<br>");
+    	}
+    }
 
 
 
 //*/
 
 </script>
-
