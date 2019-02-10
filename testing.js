@@ -1,4 +1,3 @@
-<script>
 function MACD(weightVector) {
  //PARAMS:
  var NS = 1;
@@ -268,7 +267,7 @@ for (var coord in sickCoords) {
   "increasing with + 1", "increasing acc to last 14 days of study w + 1", "decreasing Quickly","decreasing slowly"]
 	
   	var avgWeights = [50, 55, 60,65,70,75,80,85,90,95,100];
-    var noiseMultipliers = [0.2,0.6,1.0,1.4];
+    var noiseMultipliers = [0.2,0.6,1.0,1.4]; //the noise at max (1.4) can cause failures in prediction
 
   		document.write("<br>");
           		document.write("<br>");
@@ -315,16 +314,22 @@ document.write("RESULTS:");
                           		document.write("<br>");
                                 
 	//test against trial types & noise                  noiseMultipliers
-	document.write("Healthy: ");
     for(var trial = 0; trial < numTrialTypes; trial++){ 
     	document.write(trialTypeNames[trial]);
         	document.write("<br>");   
     	for(var noise = 0; noise < numNoiseTypes; noise++){
+    document.write("Noise Lvl: ");
+    document.write(noise);
+        document.write("<br>");
+	document.write("Healthy: ");
     		document.write(trialTypeNoiseHealthy[trial][noise]);
+        document.write("<br>");
+    document.write("   Sick: ");
+    		document.write(trialTypeNoiseSick[trial][noise]);
         document.write("<br>");
     	}
     }
-    document.write("   Sick: ");
+    /*
     for(var trial = 0; trial < numTrialTypes; trial++){ 
     	document.write(trialTypeNames[trial]);
         	document.write("<br>");   
@@ -332,7 +337,7 @@ document.write("RESULTS:");
     		document.write(trialTypeNoiseSick[trial][noise]);
         document.write("<br>");
     	}
-    }
+    }//*/
 
 
 
