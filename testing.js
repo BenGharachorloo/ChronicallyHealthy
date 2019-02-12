@@ -1,3 +1,5 @@
+
+<script>
 function MACD(weightVector) {
  //PARAMS:
  var NS = 1;
@@ -19,6 +21,27 @@ for(x = 0; x < N && t-x > 0; x++){
 for(x = 0; x < N && t-x > 0; x++){
 	longSum += Math.pow((1-alphL),x) * weightVector[t - x];	
 }
+
+//0 = NO FLAG
+//1 = FLAG
+
+function RoT(weightVector) {
+//sources:
+//https://theheartcenter.md/images/pdfs/CHFbooklet_web.pdf
+//https://wa.kaiserpermanente.org/healthAndWellness?item=%2Fcommon%2FhealthAndWellness%2Fconditions%2FheartDisease%2FchfBasics.html
+	//current recommended
+    var N = weightVector.length;
+    var thresh1 = 3; //lbs;
+    var thresh2 = 5; //lbs
+    if(N <= 7)
+    	return 0;
+    
+	else if((weightVector(N-1) >= weightVector(N-1-1) + thresh1 )|| (weightVector(N-1) >= weightVector(N-1-7) + thresh2 ) )
+		return 1;
+    else
+    	return 0;
+}
+
 
 
 var OI = alphS*shortSum - alphL*longSum;
@@ -147,12 +170,11 @@ weightVector = test();
 
 var numHealthy = 0;
 var numSick = 0;
-//var sickCoords = [];
-//var healthyCoords = [];
+var results = [];
 
 //MACD
 document.write("CALCULATING WEIGHT TRENDS.");
-//var coords = {w:0,t:0,n:0,healthy:0};
+var result = {MACD:0,RoT:0};
 	var healthyVector = new Array(numWeightAvgs);
 
     for(var weight = 0; weight < numWeightAvgs; weight++){
