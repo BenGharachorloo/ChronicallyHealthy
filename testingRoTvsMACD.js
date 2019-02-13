@@ -55,9 +55,9 @@ function RoT(weightVector) {
 function initNoiseVector(numNoiseTypes, noiseMultipliers,noiseVector ){
 
 for(var n = 1; n < numNoiseTypes; n++){
-  		document.write("noiseMultiplier: ");
-  		document.write((Math.random()*2*noiseMultipliers[n-1]) - noiseMultipliers[n-1]);
-  		document.write("<br>");
+  		//document.write("noiseMultiplier: ");
+  		//document.write((Math.random()*2*noiseMultipliers[n-1]) - noiseMultipliers[n-1]);
+  		//document.write("<br>");
 		for(nV = 0; nV < noiseVector[0].length; nV++){
         	noiseVector[n][nV] += (Math.random()*2*noiseMultipliers[n-1]) - noiseMultipliers[n-1];
             noiseVector[n][nV] = Math.round(noiseVector[n][nV] * 1000) / 1000
@@ -149,7 +149,7 @@ function test(){
 
 
 
-weightVector = test();
+
 
 
 
@@ -170,28 +170,30 @@ var numSick = 0;
 
 
 
-  		document.write("<br>");
-document.write("DONE CALCULATING WEIGHT TRENDS.");
-  		document.write("<br>");
-document.write("numHealthy: ");
-document.write(numHealthy);
-  		document.write("<br>");
-document.write("numSick: ");
-document.write(numSick);
-  		document.write("<br>");
-        var output = '';
-/*
-for (var coord in sickCoords) {
-  		output += coord + ': ' + sickCoords[coord]['w']+', ' + sickCoords[coord]['t']+', ' + sickCoords[coord]['n']+'; ';
-	
-}//*/
-  		document.write(output);
 
     //Tesrt
   
     //TRIAL AND NOISE
     //HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 	
+    numTests = 1000;
+    var AVGresultsRot = new Array(numTrialTypes);
+    var AVGresultsMACD = new Array(numTrialTypes);
+    for(var trial = 0; trial < numTrialTypes; trial++){
+        AVGresultsRot[trial] = new Array(numNoiseTypes);
+        AVGresultsMACD[trial] = new Array(numNoiseTypes);
+    
+    	for(var noise = 0; noise < numNoiseTypes; noise++){
+        	AVGresultsRot[trial][noise] = 0;
+        	AVGresultsMACD[trial][noise] = 0;
+        
+        }
+        
+    }  
+    
+    for (var n = 0; n < numTests; n++){
+    weightVector = test();
+    
     var resultsRot = new Array(numTrialTypes);
     var resultsMACD = new Array(numTrialTypes);
     for(var trial = 0; trial < numTrialTypes; trial++){
@@ -211,13 +213,10 @@ for (var coord in sickCoords) {
                 }
         		resultsRot[trial][noise] = earliestDay;
                 var earliestDay = -1;
-                document.write("<br>");
                 for(dayBack = 0;dayBack < 14; dayBack++){                    	
 					if(MACD(weightByDay.slice(0, numDays - dayBack))){
                     	earliestDay = dayBack;
-                        	document.write("ack");
                         }
-                        document.write(".");
                 }
         		resultsMACD[trial][noise] = earliestDay;
 			}
@@ -225,37 +224,46 @@ for (var coord in sickCoords) {
         	
 	}
     
+    //SUM INTO THING
+    if(n%9==0)
+                          		document.write("<br>");
+    
+    	for(var trial = 0; trial < numTrialTypes; trial++){
+    if(n%9==0)
+                          		document.write("<br>");
+    		for(var noise = 0; noise < numNoiseTypes; noise++){
+           	 		if(n%9==0){
+                       document.write(AVGresultsRot[trial][noise]);
+                       document.write(",");}
+        		AVGresultsRot[trial][noise] += resultsRot[trial][noise];
+        		AVGresultsMACD[trial][noise] += resultsMACD[trial][noise];
+    		}
+    
+    	}
+    
+    }
+    for(var trial = 0; trial < numTrialTypes; trial++){
+    
+    		for(var noise = 0; noise < numNoiseTypes; noise++){
+        		AVGresultsRot[trial][noise] = AVGresultsRot[trial][noise] / numTests;
+        		AVGresultsMACD[trial][noise] = AVGresultsMACD[trial][noise] / numTests;
+    		}
+    
+    	}
 
 
   	var trialTypeNames = ["healthy constant", "increasing unhealthy acc to study", "increasing unhealthy acc to last 14 days of study (largest increase)",
   "increasing with + 1", "increasing acc to last 14 days of study w + 1", "decreasing Quickly","decreasing slowly"]
 	
-  	var avgWeights = [50, 55, 60,65,70,75,80,85,90,95,100];
-    var noiseMultipliers = [0.2,0.6,1.0,1.4]; //the noise at max (1.4) can cause failures in prediction
-
+  
   		document.write("<br>");
           		document.write("<br>");
                   		document.write("<br>");
                           		document.write("<br>");
 document.write("RESULTS:");
   		document.write("<br>");
-          		document.write("<br>");
-                  		document.write("<br>");
-                          		document.write("<br>");
 
     
-    
-  		document.write("<br>");
-          		document.write("<br>");
-                  		document.write("<br>");
-                          		document.write("<br>");
-
-
-
-  		document.write("<br>");
-          		document.write("<br>");
-                  		document.write("<br>");
-                          		document.write("<br>");
                                 
 	//test against trial types & noise                  noiseMultipliers
     
@@ -264,7 +272,7 @@ document.write("RESULTS:");
         	document.write("<br>");   
     	//document.write(trialTypeNames[trial])
     	for(var noise = 0; noise < numNoiseTypes; noise++){
-        		document.write(resultsMACD[trial][noise]);
+        		document.write(AVGresultsMACD[trial][noise]);
         		document.write(",");
     	}
     }
@@ -276,7 +284,7 @@ document.write("RESULTS:");
     	//document.write(trialTypeNames[trial]);
         	document.write("<br>");   
     	for(var noise = 0; noise < numNoiseTypes; noise++){
-        		document.write(resultsRot[trial][noise]);
+        		document.write(AVGresultsRot[trial][noise]);
         		document.write(",");
     	}
     }
