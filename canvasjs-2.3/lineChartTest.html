@@ -4,11 +4,23 @@
   <script type="text/javascript" src="canvasjs.min.js"></script>
   <script type="text/javascript">
     
-
+      //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
       var weightVectorUnhealthy = [-1,-0.2,-0.2,0.2,0.1,-0.05,-0.4,-0.1,-0.2,0,0,0.15,-0.1,0.15,0.2,0.4,0,0,0,0,0.2,0.5,0.5,0,0.7,1,1.1,1.3,1.25,2,2.3];
       for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
           weightVectorUnhealthy[i] = weightVectorUnhealthy[i] + 70;
       }  
+      //end of section
+    
+      //get max and min
+    var max = weightVectorUnhealthy[0];
+    var min = weightVectorUnhealthy[0];
+      for(var i = 1 ; i < weightVectorUnhealthy.length; i++){
+        if(max < weightVectorUnhealthy[i])
+          max = weightVectorUnhealthy[i];
+        if(min > weightVectorUnhealthy[i])
+          min = weightVectorUnhealthy[i];
+      }  
+    
       var dataSet = new Array(weightVectorUnhealthy.length);
 
       for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
@@ -25,7 +37,9 @@
               text: "Weight Trend"              
             }, 
             axisY:{
-              title : "Weight (lbs)"
+              title : "Weight (lbs)",
+              minimum: min - 5,
+              maximum: max + 5
             },
             
               data: [
