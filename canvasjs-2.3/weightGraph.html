@@ -8,6 +8,11 @@
         "Warning! An unhealthy weight trend has been detected. Please contact your physician. Click here for more information";
       alert("Warning! An unhealthy weight trend has been detected.");
     }
+    function healthyTrend(){
+      
+      document.getElementById("warning").innerHTML = 
+        "You have a healthy weight trend. Thank you for monitoring your weight.";
+    }
     window.onload = function () {
        //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
       var weightVectorUnhealthy = [-1,-0.2,-0.2,0.2,0.1,-0.05,-0.4,-0.1,-0.2,0,0,0.15,-0.1,0.15,0.2,0.4,0,0,0,0,0.2,0.5,0.5,0,0.7,1,1.1,1.3,1.25,2,2.3];
@@ -54,6 +59,9 @@
               }
             }
         }
+      else{
+        healthyTrend();
+      }
         //*/
     var chart = new CanvasJS.Chart("chartContainer",
     {
@@ -92,7 +100,7 @@
     <br>
     <br>
     <br>
-    <div id="warning" style = "text-align: center;">You have  a healthy weight trend. Thank you for monitoring your weight!</div>
+    <div id="warning" style = "text-align: center;">Warning! An unhealthy weight trend has been detected. Please contact your physician. Click here for more information</div>
     <br>
     <br>
     <br>
