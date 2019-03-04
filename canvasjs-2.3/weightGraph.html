@@ -95,12 +95,14 @@
       avg = avg / weightVectorUnhealthy.length;
       avg = Math.round( avg * 10 ) / 10;
       
-      for (var  i =0; i < dataSet.length; i++){
-        dataSet[i].y = dataSet[i].y - avg;
+      var deMeaneddataSet = dataSet;
+      var deMeaneddataSet2 = dataSet2;
+      for (var  i =0; i < deMeaneddataSet.length; i++){
+        deMeaneddataSet[i].y = deMeaneddataSet[i].y - avg;
       }
       
-      for (var  i =0; i < dataSet2.length; i++){
-        dataSet2[i].y = dataSet2[i].y - avg;
+      for (var  i =0; i < deMeaneddataSet2.length; i++){
+        deMeaneddataSet2[i].y = deMeaneddataSet2[i].y - avg;
       }
       
       var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
@@ -116,11 +118,11 @@
         data: [
       {
         type: "area",
-        dataPoints: dataSet
+        dataPoints: deMeaneddataSet
       },{
       
         type: "area",
-        dataPoints: dataSet2
+        dataPoints: deMeaneddataSet2
       }
       ]
     });
