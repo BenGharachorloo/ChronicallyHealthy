@@ -46,11 +46,6 @@
         dataSet[i].y = weightVectorUnhealthy[i];
       }  
   	var dataSet2;
-      var avg = 0;
-      for (var  i =0; i < dataSet.length; i++){
-        avg += dataSet[i];
-      }
-      avg = avg / dataSet.length;
       
       //highlight the unhealthy area
     if (flagDate && flagDate.length) {
@@ -93,13 +88,19 @@
       ]
     });
       
+      var avg = 0;
+      for (var  i =0; i < weightVectorUnhealthy.length; i++){
+        avg += weightVectorUnhealthy[i];
+      }
+      avg = avg / weightVectorUnhealthy.length;
+      avg = Math.round( avg * 10 ) / 10;
       
       for (var  i =0; i < dataSet.length; i++){
-        dataSet[i] = dataSet[i] - avg;
+        dataSet[i].y = dataSet[i].y - avg;
       }
       
       for (var  i =0; i < dataSet2.length; i++){
-        dataSet2[i] = dataSet2[i] - avg;
+        dataSet2[i].y = dataSet2[i].y - avg;
       }
       
       var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
