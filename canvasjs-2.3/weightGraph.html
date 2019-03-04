@@ -47,6 +47,19 @@
       }  
   	var dataSet2;
       
+      
+      var deMeaneddataSet = new Array(weightVectorUnhealthy.length);
+      
+      for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
+        var date = "Feb " + (i + 1);
+        //dataSet.push({ label: date, value: 1 });
+        deMeaneddataSet[i] = {};
+        deMeaneddataSet[i].label = date;
+        deMeaneddataSet[i].x = i;
+        deMeaneddataSet[i].y = weightVectorUnhealthy[i];
+      }  
+  	var deMeaneddataSet2;
+      
       //highlight the unhealthy area
     if (flagDate && flagDate.length) {
       //person IS UNHEALTHY!! COLOUR GRAPH & ALERT
@@ -57,6 +70,9 @@
               if(dataSet[i].label == flagDate){
                 dataSet2 = dataSet.slice(i, dataSet.length);
                 dataSet = dataSet.slice(0, i+1);
+                //DEMEANED
+                deMeaneddataSet2 = deMeaneddataSet.slice(i, deMeaneddataSet.length);
+                deMeaneddataSet = deMeaneddataSet.slice(0, i+1);
               	//exit loop
                 i = dataSet.length+1;
               }
@@ -88,6 +104,7 @@
       ]
     });
       
+      
       var avg = 0;
       for (var  i =0; i < weightVectorUnhealthy.length; i++){
         avg += weightVectorUnhealthy[i];
@@ -95,8 +112,6 @@
       avg = avg / weightVectorUnhealthy.length;
       avg = Math.round( avg * 10 ) / 10;
       
-      var deMeaneddataSet = dataSet;
-      var deMeaneddataSet2 = dataSet2;
       for (var  i =0; i < deMeaneddataSet.length; i++){
         deMeaneddataSet[i].y = deMeaneddataSet[i].y - avg;
       }
@@ -104,6 +119,8 @@
       for (var  i =0; i < deMeaneddataSet2.length; i++){
         deMeaneddataSet2[i].y = deMeaneddataSet2[i].y - avg;
       }
+      
+      unhealthyTrend(dataSet2[1].y);
       
       var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
     {
