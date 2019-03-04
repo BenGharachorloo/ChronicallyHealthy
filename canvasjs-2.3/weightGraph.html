@@ -46,6 +46,12 @@
         dataSet[i].y = weightVectorUnhealthy[i];
       }  
   	var dataSet2;
+      var avg = 0;
+      for (var  i =0; i < dataSet.length; i++){
+        avg += dataSet[i];
+      }
+      avg = avg / dataSet.length;
+      
       //highlight the unhealthy area
     if (flagDate && flagDate.length) {
       //person IS UNHEALTHY!! COLOUR GRAPH & ALERT
@@ -65,7 +71,38 @@
         healthyTrend();
       }
         //*/
-    var chart = new CanvasJS.Chart("chartContainer",
+    var actualWeightChart = new CanvasJS.Chart("chartContainer",
+    {
+            axisY:{
+              title : "Weight (kg)",
+              minimum: min - 1,
+              maximum: max + 1
+            },
+      title: {
+        text: "Weight Trend"
+      },
+        data: [
+      {
+        type: "area",
+        dataPoints: dataSet
+      },{
+      
+        type: "area",
+        dataPoints: dataSet2
+      }
+      ]
+    });
+      
+      
+      for (var  i =0; i < dataSet.length; i++){
+        dataSet[i] = dataSet[i] - avg;
+      }
+      
+      for (var  i =0; i < dataSet2.length; i++){
+        dataSet2[i] = dataSet2[i] - avg;
+      }
+      
+      var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
     {
             axisY:{
               title : "Weight (kg)",
@@ -87,7 +124,8 @@
       ]
     });
 
-    chart.render();
+    actualWeightChart.render();
+    deMeanedChart.render();
   }
     
     
@@ -97,7 +135,8 @@
 <body>
   <div w3-include-html="ChronicallyHealthy/sidebar.html"></div> 
   <div style = "margin-left:25%;">
-    <div id="chartContainer" style="height: 500px; width: 50%;"></div>
+    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+    <div id="chartContainerDeMeaned" style="height: 500px; width: 100%;"></div>
   </div>
   <div>
     <br>
