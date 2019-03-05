@@ -53,9 +53,11 @@ body {font-family: "Lato", sans-serif;}
       alert("Warning! An unhealthy weight trend has been detected.");
     }
     function healthyTrend(){
-      
-      document.getElementById("warning").innerHTML = 
+      //element
+      var elem = document.getElementById("warning")
+      elem.innerHTML = 
         "You have a healthy weight trend. Thank you for monitoring your weight.";
+      elem.style.backgroundColor = #7CF280;
     }
     window.onload = function () {
        //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
@@ -106,7 +108,7 @@ body {font-family: "Lato", sans-serif;}
       //highlight the unhealthy area
     if (flagDate && flagDate.length) {
       //person IS UNHEALTHY!! COLOUR GRAPH & ALERT
-      unhealthyTrend();
+      healthyTrend();//change back later to unhealthy
       
             // array and array.length are truthy
       		for(var i = 0 ; i < dataSet.length; i++){
