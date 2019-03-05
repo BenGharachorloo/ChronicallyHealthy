@@ -54,7 +54,7 @@ body {font-family: "Lato", sans-serif;}
     }
     function healthyTrend(){
       //element
-      var elem = document.getElementById("warning")
+      var elem = document.getElementById("warningContainer")
       elem.innerHTML = 
         "You have a healthy weight trend. Thank you for monitoring your weight.";
       elem.style.backgroundColor = "#7CF280";
@@ -204,7 +204,7 @@ body {font-family: "Lato", sans-serif;}
     <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
     <a href="#about"><i class="fa fa-fw fa-info-circle"></i> About</a>
   </div>
-    <div class = "warningStyle" >
+    <div id="warningContainer" class = "warningStyle" >
       <div id="warning" style = " text-align: center; ">
         <p>Warning!</p>
         <p>An unhealthy weight trend has been detected. Please contact your physician. Click here for more information</p>
