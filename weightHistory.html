@@ -61,6 +61,7 @@ tr:nth-child(even) {
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+  /*
   var title = "Constructing HTML Elements";
 
 var container = $("<div>");
@@ -70,9 +71,29 @@ var h1 = $("<h1>");
 h1.text(title);
 h1.addClass("tutorial-heading"); 
 container.append(h1);
+$("body").append(wrapper);//*/
 
-$("body").append(wrapper);
+  
+  
+  //attempting to make a table thing
+  
+var date = "February 10, 2019 - 4:55";
+var weight = "110kg";
 
+var table = $("<table>");
+table.css("width","100%");
+
+var row = $("<tr>");
+var tableData = $("<td>");
+  
+tableData.text(date)
+row.append(tableData)
+tableData.text(weight)
+row.append(tableData)
+table.append(row);
+
+  
+$("body").append(table);
   
 </script>
 </head>
