@@ -31,7 +31,9 @@ window.onload = function() {
     }
     var date = new Array(numDays);
     for(var i = 0 ; i < numDays; i++){
-         date[i] = "February " + (i + 1);
+	 var hour = Math.floor(Math.random() * 12);
+	 var minute = Math.floor(Math.random() * 60);
+         date[i] = "February " + (i + 1) + ", 2019 at " +  hour + ":" + minute + "PM";
         
     }
     
