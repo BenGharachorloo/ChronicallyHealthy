@@ -35,66 +35,61 @@ body {font-family: "Lato", sans-serif;}
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
-
-
-
-
-
-
-
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
-
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
-
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-  /*
-  var title = "Constructing HTML Elements";
+window.onload = function() {
+//replace this section with actual vector
+	var weightVectorUnhealthy = [-1,-0.2,-0.2,0.2,0.1,-0.05,-0.4,-0.1,-0.2,0,0,0.15,-0.1,0.15,0.2,0.4,0,0,0,0,0.2,0.5,0.5,0,0.7,1,1.1,1.3,1.25,2,2.3];
+    numDays = weightVectorUnhealthy.length;
+    for(var t = 0; t < numDays; t++){
+    	weightVectorUnhealthy[t]+=70;
+    }
+    var date = new Array(numDays);
+    for(var i = 0 ; i < numDays; i++){
+         date[i] = "February " + (i + 1);
+        
+    }
+    
+    //actual displaying
+    for(var i =  numDays - 1 ; i >= 0 ; i--){
+        var newRow = document.createElement("TR");
 
-var container = $("<div>");
-container.addClass("tutorial");
+        // Insert a cell in the row at index 0
+        var newCell  = newRow.insertCell(0);
 
-var h1 = $("<h1>");
-h1.text(title);
-h1.addClass("tutorial-heading"); 
-container.append(h1);
-$("body").append(wrapper);//*/
+		var dateString = date[i]; 
+        // Append a text node to the cell
+        var newText  = document.createTextNode(dateString);
+        newCell.appendChild(newText);
 
-  
-  
-  //attempting to make a table thing
-  
-var date = "February 10, 2019 - 4:55";
-var weight = "110kg";
 
-var table = $("<table>");
-table.css("width","100%");
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(1);
+		var weight = weightVectorUnhealthy[i]; 
+        // Append a text node to the cell
+        //weightVectorUnhealthy[t].toString()
+         newText  = document.createTextNode(weight);
+        newCell.appendChild(newText);
+  		document.getElementById("weightTable").appendChild(newRow);
+  
+  	}
+  
 
-var row = $("<tr>");
-var tableData = $("<td>");
-  
-tableData.text(date)
-row.append(tableData)
-tableData.text(weight)
-row.append(tableData)
-table.append(row);
-
-  
-$("body").append(table);
-  
+}
 </script>
 </head>
 
@@ -110,31 +105,18 @@ $("body").append(table);
    
   <br>
   <br>
-  <div style = "margin-left:20%;">
-<table style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th> 
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td> 
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td> 
-    <td>94</td>
-  </tr>
-</table>
-
+  <div style = "margin-left:20%;"> 
+    <table id = "weightTable" style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Weight</th>
+      </tr>
+      
+    </table>
+  </div>
 
 
 
 
 </body>
 </html>
-
-
-
