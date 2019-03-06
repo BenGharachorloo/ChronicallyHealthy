@@ -45,6 +45,7 @@ body {font-family: "Lato", sans-serif;}
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+  width: 20%;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -82,20 +83,20 @@ body {font-family: "Lato", sans-serif;}
   <br>
   <div style = "margin-left:20%;">
     <div>
-      <div class="card" style="left: 0%; ">
+      <div class="card" style="position: absolute; left: 0%; ">
         <div class="container">
           <h4><b>Name - Patient</b></h4>
           <p>416 123 4567</p>
         </div>
       </div>
-      <div class="card" style="left: 33%; ">
+      <div class="card" style="position: absolute; left: 33%; ">
         <div class="container">
           <h4><b>John Doe</b></h4>
           <h5><i>Primary Caregiver</i></h5>
           <p>416 123 4567</p>
         </div>
       </div>
-      <div class="card" style="left: 67%; ">
+      <div class="card" style="position: absolute; left: 67%; ">
         <div class="container">
           <h4><b>John Doe </b></h4>
           <p><i>Physician</i></p>
@@ -105,22 +106,25 @@ body {font-family: "Lato", sans-serif;}
       
       
       
-      <div class="card" style="left: 0%; top: 400px;">
+      <div class="card" style="position: absolute; left: 0%; top: 400px;">
         <div class="container">
-          <h4><b>Name - <small>Patient</small></b></h4>
-          <p>416 123 4567</p>
+          <p>
+            John Doe
+            <i>Patient</i>
+          </p>
         </div>
       </div>
-      <div class="card" style="left: 33%; top: 400px;">
+      <div class="card" style="position: absolute; left: 26.4%; top: 400px;">
         <div class="container">
           <h4><b>Name - Primary Caregiver</b></h4>
-          <h5><b>Physician</b></h5>
-          <p>416 123 4567</p>
+          <p><b>Physician</b>
+            <br>
+          <i>416 123 4567</i></p>
         </div>
       </div>
-      <div class="card" style="left: 67%; top: 400px;">
+      <div class="card" style="position: absolute; left: 52.8%; top: 400px;">
         <div class="container">
-          <h4><b>John Doe </b></h4>
+          <p><b>John Doe </b></p>
           <p><b>Physician</b></p>
           <p>416 123 4567</p>
         </div>
