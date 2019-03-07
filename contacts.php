@@ -4,26 +4,33 @@ $filename = 'contacts.txt';
  
 if(file_exists($filename)){
 	#each contact has 4 lines
+	$fileName = "contacts.txt";
 	$file = fopen("contacts.txt","r");
 	$i = 0;
 	$patient = array("name","telephone","email","fax");
 	$caretaker = array("name","telephone","email","fax");
 	$physician = array("name","telephone","email","fax");
-	while(! feof($file)){
-		if($i/4<1){
-			$patient[$i%4] = fgets($file);	
-		}	
-		else if ($i/4<2){
-			$caretaker[$i%4] = fgets($file);
+	if($file){ //double check if file is open
+		while(! feof($file)){
+			if(($i/4)<1){
+				$patient[$i%4] = fgets($file);	
+			}	
+			else if (($i/4)<2){
+				$caretaker[$i%4] = fgets($file);
+			}
+			else if (($i/4)<3){
+				$physician[$i%4] = fgets($file);
+			}
+			$i++;
 		}
-		else if ($i/4<3){
-			$physician[$i%4] = fgets($file);
-		}
-		$i++;
+		fclose($file);
+	}else{
+		echo '                    file: ' ;
+		echo $fileName;
+		echo' is not opened, or not found.';		
 	}
 
 
-	fclose($file);
 	
 }else{
 	
