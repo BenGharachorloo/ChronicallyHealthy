@@ -32,7 +32,11 @@ window.onload = function() {
     var date = new Array(numDays);
     for(var i = 0 ; i < numDays; i++){
 	 var hour = Math.floor(Math.random() * 12);
+	 if(hour < 10)
+	    hour = "0" + hour;
 	 var minute = Math.floor(Math.random() * 60);
+	 if(minute < 10)
+	    minute = "0" + minute;
          date[i] = "February " + (i + 1) + ", 2019 at " +  hour + ":" + minute + "PM";
         
     }
