@@ -1,4 +1,39 @@
-<!DOCTYPE HTML>
+<?php
+ 
+$filename = 'contacts.txt';
+ 
+if(file_exists($filename)){
+	#each contact has 4 lines
+	$file = fopen("contacts.txt","r");
+	$i = 0;
+	$patient = array("name","telephone","email","fax");
+	$caretaker = array("name","telephone","email","fax");
+	$physician = array("name","telephone","email","fax");
+	while(! feof($file)){
+		if($i/4<1){
+			$patient[$i%4] = fgets($file);	
+		}	
+		else if ($i/4<2){
+			$caretaker[$i%4] = fgets($file);
+		}
+		else if ($i/4<3){
+			$physician[$i%4] = fgets($file);
+		}
+		$i++;
+	}
+
+
+	fclose($file);
+	
+}else{
+	
+	$url = 'http://localhost/ChronicallyHealthy/insertContacts.php'; 
+	header("Location: $url");
+}
+
+
+
+?>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -65,27 +100,26 @@ body {font-family: "Lato", sans-serif;}
       
       <div class="card" style="position: absolute; left: 20%; top: 100px;">
         <div class="container">
-          <h4><b>John Doe (Patient)</b></h4>
-          <p><i>TEL: 416 123 4567</i></p>
-          <p><i>EMAIL: john.doe@gmail.com</i></p>
-          <p><i>FAX: 416 123 4567</i></p>
+          <h4><b><?php echo $patient[0];?> (Patient)</b></h4>
+          <p><i>TEL: <?php echo $patient[1];?></i></p>
+          <p><i>EMAIL: <?php echo $patient[2];?></i></p>
+          <p><i>FAX: <?php echo $patient[3];?></i></p>
         </div>
       </div>
       <div class="card" style="position: absolute; left: 46.4%; top: 100px;">
         <div class="container">
-          <h4><b>Nurse Jon Doe (Primary Caregiver)</b></h4>
-          <p><i>TEL: 416 123 4567</i></p>
-          <p><i>EMAIL: john.doe@gmail.com</i></p>
-          <p><i>FAX: 416 123 4567</i></p>
-          <p><i>ADDRESS: 24 Sussex Drive</i></p>
+          <h4><b><?php echo $caretaker[0];?> (Primary Caregiver)</b></h4>
+          <p><i>TEL: <?php echo $caretaker[1];?></i></p>
+          <p><i>EMAIL: <?php echo $caretaker[2];?></i></p>
+          <p><i>FAX: <?php echo $caretaker[3];?></i></p>
         </div>
       </div>
       <div class="card" style="position: absolute; left: 72.8%; top: 100px;">
         <div class="container">
-          <h4><b>Dr. Jawn Doe (Primary Physician)</b></h4>
-          <p><i>TEL: 416 123 4567</i></p>
-          <p><i>EMAIL: john.doe@gmail.com</i></p>
-          <p><i>FAX: should we even include fax</i></p>
+          <h4><b><?php echo $physician[0];?>  (Primary Physician)</b></h4>
+          <p><i>TEL: <?php echo $physician[1];?> </i></p>
+          <p><i>EMAIL: <?php echo $physician[2];?> </i></p>
+          <p><i>FAX: <?php echo $physician[3];?> </i></p>
         </div>
       </div>
       
