@@ -1,11 +1,38 @@
-<!DOCTYPE HTML>
 <html>
 <head>
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
 <style>
-body {font-family: "Lato", sans-serif;}
+body {font-family: "Lato", sans-serif; background-color: #699d95;}
+
+
+
+.card {
+  /* Add shadows to create the "card" effect */
+  background-color: #EEFFEE;
+  margin-right:5%;
+  font-size: 36px;
+}
+
+.bouton{
+  background-color: green;
+  border-style: solid;
+  border-color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+/*lighter: #D9FdF5
+  darker: #699d95
+  default: #79ada5
+  */
 </style>
 
 </head>
@@ -13,34 +40,47 @@ body {font-family: "Lato", sans-serif;}
 <body>
     <div class="sidebar">
     
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i>Doctor's Visits</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/contacts.html"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about"><i class="fa fa-fw fa-info-circle"></i> About</a>
-  </div>
+		<a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+		<a href="https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
+		<a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i>Doctor's Visits</a>
+		<a href="https://bengharachorloo.github.io/ChronicallyHealthy/contacts.html"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+		<a href="https://bengharachorloo.github.io/ChronicallyHealthy/about"><i class="fa fa-fw fa-info-circle"></i> About</a>
+	</div>
    <div style = "margin-left:20%;">
-     <div>
-       <h1>Pre-Visit Assessment</h1>
-     </div>
-     <div>
-       <br>
-       <br>
-       <br>
-       <ol type="1">
-         <li>What time was your last bowel movement?</li>
-         <li>Are you on any of the following medications:</li>
-         <ul style="list-style-type:disc;">
-           <li>Coffee</li>
-           <li>Tea</li>
-           <li>Milk</li>
-         </ul>
-         <li>Have you been dieting or exercising?</li>
-       </ol>
-       <br>
-       <br>
-       <br>
-     </div>
+		<div class = "card">
+			 <div >
+			   <h1 style="padding-top: 35px; text-align:center;">Pre-Doctor's Visit Assessment</h1>
+			 </div>
+			 <div  style = "margin-left:10%; margin-right:10%;">
+			   <br>
+			   
+			   <form method="post" action="<?php?>">  
+					<div >
+						  <b>What time was your last bowel movement? </b><br> 
+						  <div style=" margin-left: 50px; ">
+							  <input type="radio" name="lastBowelMovement" value="0" checked >  &lt 6 hours ago<br>
+							  <input type="radio" name="lastBowelMovement" value="1"> Today <br>
+							  <input type="radio" name="lastBowelMovement" value="2" checked> Yesterday<br> 
+						  </div>
+						  <br>
+						   <b>Have you gone through any changes in diet or activity level?  </b><br>
+						  <div style=" margin-left: 50px;">
+							  <input type="radio" name="dietChange" value="1" checked> Yes<br>
+							  <input type="radio" name="dietChange" value="0"> No<br>
+						  </div>
+					</div>  
+				</form>
+				
+				   <b>Please bring a list of the medication you are taking:  </b><br>
+					<textarea style="width: 100%; height: 30%;" name="comment" form="usrform"></textarea>
+				  <br><br>
+      
+			   
+			   <br>
+			   <br>
+			   <br>
+			</div>
+		</div>
    </div>
 </body>
 </html>
