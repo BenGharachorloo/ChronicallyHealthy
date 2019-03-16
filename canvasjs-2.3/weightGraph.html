@@ -21,9 +21,29 @@ body {font-family: "Lato", sans-serif;}
   <script type="text/javascript" src="canvasjs.min.js"></script>
   <script type="text/javascript">
     function unhealthyTrend(){
-      document.getElementById("warning").innerHTML = 
-        "Warning! An unhealthy weight trend has been detected. Please contact your physician. Click here for more information";
-      alert("Warning! An unhealthy weight trend has been detected.");
+		
+		var line1 = "Warning: An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician.";
+		var line2 = "Click here for more information.";
+		var para1 = document.createElement("p");
+		var para2 = document.createElement("p");
+        var line1  = document.createTextNode(line1 );
+        var line2  = document.createTextNode(line2);
+		
+		
+		para1.appendChild(line1);
+		para2.appendChild(line2);
+        var warningElem = document.createElement("div");
+
+	  warningElem.appendChild(para1);
+	  warningElem.appendChild(para2);
+	  var oldWarningID = document.getElementById("warning");
+	  
+	  
+	  parent = oldWarningID.parentNode;
+	  parent.insertBefore(warningElem, oldWarningID);
+
+	  // Remove the original
+	  parent.removeChild(oldWarningID);//*/
     }
     function healthyTrend(){
       //element
@@ -39,7 +59,7 @@ body {font-family: "Lato", sans-serif;}
           weightVectorUnhealthy[i] = weightVectorUnhealthy[i] + 70;
       }  
   //var flagDate; //healthy
-  var flagDate = "Feb 23"; //sick
+  var flagDate = "Mar 23"; //sick
       //end of section
     
       //get max and min
@@ -56,7 +76,7 @@ body {font-family: "Lato", sans-serif;}
       var dataSet = new Array(weightVectorUnhealthy.length);
 
       for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
-        var date = "Feb " + (i + 1);
+        var date = "Mar " + (i + 1);
         //dataSet.push({ label: date, value: 1 });
         dataSet[i] = {};
         dataSet[i].label = date;
@@ -69,7 +89,7 @@ body {font-family: "Lato", sans-serif;}
       var deMeaneddataSet = new Array(weightVectorUnhealthy.length);
       
       for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
-        var date = "Feb " + (i + 1);
+        var date = "Mar " + (i + 1);
         //dataSet.push({ label: date, value: 1 });
         deMeaneddataSet[i] = {};
         deMeaneddataSet[i].label = date;
@@ -170,16 +190,17 @@ body {font-family: "Lato", sans-serif;}
 <body>
   <div class="sidebar">
     
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/contacts.html"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://localhost/ChronicallyHealthy/canvasjs-2.3/weightGraph.php"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="http://localhost/ChronicallyHealthy/weightHistory.php"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="http://localhost/ChronicallyHealthy/preVisitAssessment.php"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="http://localhost/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+    <a href="http://localhost/ChronicallyHealthy/about.php"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://localhost/ChronicallyHealthy/userGuide.php"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
   </div>
-    <div id="warningContainer" class = "warningStyle" >
-      <div id="warning" style = " text-align: center; ">
-        <p>Warning!</p>
-        <p>An unhealthy weight trend has been detected. Please contact your physician. Click here for more information</p>
+    <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
+      <div id="warning" >
+        <p>Warning:</p>
+        <p>An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician. Click here for more information.</p>
       </div>
     </div>
   <br>
