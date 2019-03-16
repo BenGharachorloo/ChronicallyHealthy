@@ -156,11 +156,12 @@ function test_input($data) {
  
   <div class="sidebar">
     
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/contacts.html"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
-    <a href"https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://localhost/ChronicallyHealthy/canvasjs-2.3/weightGraph.php"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="http://localhost/ChronicallyHealthy/weightHistory.php"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="http://localhost/ChronicallyHealthy/preVisitAssessment.php"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="http://localhost/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+    <a href="http://localhost/ChronicallyHealthy/about.php"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://localhost/ChronicallyHealthy/userGuide.php"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
   </div>
   <br>
   <br>
@@ -174,35 +175,41 @@ function test_input($data) {
 	<form method="post" action="<?php
 
 
-	$file = fopen("contacts.txt","w");
-	
-	fwrite($file ,$patientName);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$patientEmail);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$patientPhone);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$patientFax);
-	fwrite($file ,"\r\n");
-	
-	fwrite($file ,$caretakerName);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$caretakerEmail);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$caretakerPhone);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$caretakerFax);
-	fwrite($file ,"\r\n");
-	
-	fwrite($file ,$physicianName);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$physicianEmail);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$physicianPhone);
-	fwrite($file ,"\r\n");
-	fwrite($file ,$physicianFax);
-	fwrite($file ,"\r\n");
-	
+		
+		
+		if (isset($_POST['submit'])){
+			$file = fopen("contacts.txt","w");
+			
+			fwrite($file ,$patientName);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$patientEmail);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$patientPhone);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$patientFax);
+			fwrite($file ,"\r\n");
+			
+			fwrite($file ,$caretakerName);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$caretakerEmail);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$caretakerPhone);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$caretakerFax);
+			fwrite($file ,"\r\n");
+			
+			fwrite($file ,$physicianName);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$physicianEmail);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$physicianPhone);
+			fwrite($file ,"\r\n");
+			fwrite($file ,$physicianFax);
+			fclose($file);
+			
+			$url = 'http://localhost/ChronicallyHealthy/contacts.php'; 
+			header("Location: $url");
+		}//*/
 	
 	
 	
