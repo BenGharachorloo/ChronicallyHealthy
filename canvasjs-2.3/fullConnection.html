@@ -7,10 +7,6 @@
   	  </head>
   <body>
 
-    <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
   <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
       <div id="warning" >
         <p>Warning:</p>
@@ -100,7 +96,7 @@ var data = new Array();
 	  
 	  //this is THE function
 	  function buildGraph(weightVector,dateVector,healthTypeVector){
-	      document.write("floweyfloweyfloweyflowey");
+	      document.write("sanssanssanssanssans");
 	    //get avg
       var avg = 0;
       for (var  i =0; i < weightVector.length; i++){
@@ -267,7 +263,8 @@ var data = new Array();
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
     }
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-
   </body>
 </html>
