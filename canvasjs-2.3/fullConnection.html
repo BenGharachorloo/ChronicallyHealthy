@@ -2,7 +2,71 @@
   <head></head>
   <body>
 
-    <script>
+    <script type="text/javascript" src="canvasjs.min.js"></script>
+  <script>
+    function unhealthyTrend(){
+		
+		var line1 = "Warning: An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician.";
+		var line2 = "Click here for more information.";
+		var para1 = document.createElement("p");
+		var para2 = document.createElement("p");
+        var line1  = document.createTextNode(line1 );
+        var line2  = document.createTextNode(line2);
+		
+		
+		para1.appendChild(line1);
+		para2.appendChild(line2);
+        var warningElem = document.createElement("div");
+	  warningElem.appendChild(para1);
+	  warningElem.appendChild(para2);
+	  var oldWarningID = document.getElementById("warning");
+	  
+	  
+	  parent = oldWarningID.parentNode;
+	  parent.insertBefore(warningElem, oldWarningID);
+	  // Remove the original
+	  parent.removeChild(oldWarningID);//*/
+    }
+    function healthyTrend(){
+      //element
+      var elem = document.getElementById("warningContainer")
+      elem.innerHTML = 
+        "You have a healthy weight trend. Thank you for monitoring your weight.";
+      elem.style.backgroundColor = "#7CF280";
+    }
+	  function whichColor(healthType){
+	if(healthType == "Indeterminate")
+    	return "gray"
+	if(healthType == "Healthy")
+    	return "blue"
+	if(healthType == "Unhealthy")
+    	return "red"
+}
+function buildData(weightVector,dateVector,healthTypeVector){
+var data = new Array();
+	var dataSeries = {};
+	dataSeries.type = "area";
+	dataSeries.color = whichColor(healthTypeVector[0]);
+	dataSeries.dataPoints = new Array();
+	dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
+	data.push(dataSeries);
+    j = 0;
+	for(var i = 1; i < weightVector.length; i++){
+	if (healthTypeVector[i] != healthTypeVector[i-1]){
+		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+		var dataSeries = {};
+		dataSeries.type = "area";
+		dataSeries.color = whichColor(healthTypeVector[i]);
+		dataSeries.dataPoints = new Array();
+		dataSeries.dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+		data.push(dataSeries);
+	    j++;
+	}
+	else
+		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+	}
+	return data
+	}
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
