@@ -1,7 +1,14 @@
 <html>
   <head>
     <script type="text/javascript" src="canvasjs.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
   <script>
+	  
+        var dateVector;
+        var weightVector;
+        var healthTypeVector;
     function unhealthyTrend(){
 		
 		var line1 = "Warning: An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician.";
@@ -64,29 +71,13 @@ var data = new Array();
 	}
 	return data;
 	}
-    function makeApiCall() {
-      var params = {
-        // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
-        range: 'Test'
-      };
-      var request = gapi.client.sheets.spreadsheets.values.get(params);
-      request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result);
-        //what to do with result? 
-        //build weight Vector
-        var formattedResult = buildVectors(response.result.values);
-        var dateVector = formattedResult[0];
-        var weightVector = formattedResult[1];
-        var healthTypeVector = formattedResult[2];
-	      /*
-        console.log(dateVector);
-        console.log(weightVector);
-        console.log(healthTypeVector);//*/
-	      document.write("alrbabrarbaor");
-	 
-	  //get avg
+	  
+	  
+	  
+	  //this is THE function
+	  window.onload = function () {
+	      document.write("YARHARHARHARHAR");
+	    //get avg
       var avg = 0;
       for (var  i =0; i < weightVector.length; i++){
         avg += weightVector[i];
@@ -124,7 +115,7 @@ var data = new Array();
       
       var healthy = true;
       //highlight the unhealthy area
-    /* if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
+     if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
        unhealthyTrend();//change back later to unhealthy
        healthy = false;
 	     i = healthTypeVector.length;
@@ -166,6 +157,31 @@ var data = new Array();
     actualWeightChart.render();
     deMeanedChart.render();     
 	      
+	  
+	  }
+	  
+    function makeApiCall() {
+      var params = {
+        // The ID of the spreadsheet to retrieve data from.
+        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
+        range: 'Test'
+      };
+      var request = gapi.client.sheets.spreadsheets.values.get(params);
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        console.log(response.result);
+        //what to do with result? 
+        //build weight Vector
+        var formattedResult = buildVectors(response.result.values);
+         dateVector = formattedResult[0];
+         weightVector = formattedResult[1];
+         healthTypeVector = formattedResult[2];
+	      /*
+        console.log(dateVector);
+        console.log(weightVector);
+        console.log(healthTypeVector);//*/
+	 
+	
 	      
 	      
 	      
