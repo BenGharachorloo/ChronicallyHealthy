@@ -83,8 +83,29 @@ var data = new Array();
         var dateVector = formattedResult[0];
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[1];
-        document.write(dateVector);
+        document.write(weightVector);
 	      
+	      
+	 
+	  //get avg
+      var avg = 0;
+      for (var  i =0; i < weightVector.length; i++){
+        avg += weightVector[i];
+      }
+      avg = avg / weightVector.length;
+      avg = Math.round( avg * 10 ) / 10;
+      
+	  
+	  
+	  var deMeaned_weightVector = new Array();
+	  for (var  i =0; i < weightVector.length; i++){
+		deMeaned_weightVector.push(weightVector[i] - avg);
+	  }
+	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
+	  
+	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
+      //end of section
+    
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
