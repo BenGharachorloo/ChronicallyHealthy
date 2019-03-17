@@ -52,97 +52,45 @@ body {font-family: "Lato", sans-serif;}
         "You have a healthy weight trend. Thank you for monitoring your weight.";
       elem.style.backgroundColor = "#7CF280";
     }
+	  
+function buildData(weightVector,dateVector,healthTypeVector){
+var data = new Array();
+
+	var dataSeries = {};
+	dataSeries.type = "area";
+	dataSeries.color = whichColor(healthTypeVector[0]);
+	dataSeries.dataPoints = new Array();
+	dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
+	data.push(dataSeries);
+    j = 0;
+
+	for(var i = 1; i < weightVector.length; i++){
+	if (healthTypeVector[i] != healthTypeVector[i-1]){
+		var dataSeries = {};
+		dataSeries.type = "area";
+		dataSeries.color = whichColor(healthTypeVector[i]);
+		dataSeries.dataPoints = new Array();
+		dataSeries.dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+		data.push(dataSeries);
+	    j++;
+	}
+	else
+		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+	}
+
+	return data
+	}
+
+
     window.onload = function () {
        //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
-      var weightVectorUnhealthy = [-1,-0.2,-0.2,0.2,0.1,-0.05,-0.4,-0.1,-0.2,0,0,0.15,-0.1,0.15,0.2,0.4,0,0,0,0,0.2,0.5,0.5,0,0.7,1,1.1,1.3,1.25,2,2.3];
-      for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
-          weightVectorUnhealthy[i] = weightVectorUnhealthy[i] + 70;
-      }  
-  //var flagDate; //healthy
-  var flagDate = "Mar 23"; //sick
-      //end of section
-    
-      //get max and min
-    var max = weightVectorUnhealthy[0];
-    var min = weightVectorUnhealthy[0];
-    
-      for(var i = 1 ; i < weightVectorUnhealthy.length; i++){
-        if(max < weightVectorUnhealthy[i])
-          max = weightVectorUnhealthy[i];
-        if(min > weightVectorUnhealthy[i])
-          min = weightVectorUnhealthy[i];
-      }  
-    
-      var dataSet = new Array(weightVectorUnhealthy.length);
-
-      for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
-        var date = "Mar " + (i + 1);
-        //dataSet.push({ label: date, value: 1 });
-        dataSet[i] = {};
-        dataSet[i].label = date;
-        dataSet[i].x = i;
-        dataSet[i].y = weightVectorUnhealthy[i];
-      }  
-  	var dataSet2;
       
-      
-      var deMeaneddataSet = new Array(weightVectorUnhealthy.length);
-      
-      for(var i = 0 ; i < weightVectorUnhealthy.length; i++){
-        var date = "Mar " + (i + 1);
-        //dataSet.push({ label: date, value: 1 });
-        deMeaneddataSet[i] = {};
-        deMeaneddataSet[i].label = date;
-        deMeaneddataSet[i].x = i;
-        deMeaneddataSet[i].y = weightVectorUnhealthy[i];
-      }  
-  	var deMeaneddataSet2;
-      
-      //highlight the unhealthy area
-    if (flagDate && flagDate.length) {
-      //person IS UNHEALTHY!! COLOUR GRAPH & ALERT
-      unhealthyTrend();//change back later to unhealthy
-      
-            // array and array.length are truthy
-      		for(var i = 0 ; i < dataSet.length; i++){
-              if(dataSet[i].label == flagDate){
-                dataSet2 = dataSet.slice(i, dataSet.length);
-                dataSet = dataSet.slice(0, i+1);
-                //DEMEANED
-                deMeaneddataSet2 = deMeaneddataSet.slice(i, deMeaneddataSet.length);
-                deMeaneddataSet = deMeaneddataSet.slice(0, i+1);
-              	//exit loop
-                i = dataSet.length+1;
-              }
-            }
-        }
-      else{
-        healthyTrend();
-      }
-        //*/
-    var actualWeightChart = new CanvasJS.Chart("chartContainer",
-    {
-            axisY:{
-              title : "Weight (kg)",
-              minimum: min - 1,
-              maximum: max + 1
-            },
-      title: {
-        text: "Weight Trend"
-      },
-        data: [
-      {
-        type: "area",
-        dataPoints: dataSet
-      },{
-      
-        type: "area",
-        dataPoints: dataSet2
-      }
-      ]
-    });
-      
-      
+	 var weightVector= [-1,-0.2,-0.2,1.1,1.3,1.25,2.3];
+	var dateVector = ["Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7"];
+	var healthTypeVector = ["Indeterminate","Indeterminate","Healthy","Healthy","Healthy","Unhealthy","Unhealthy"];
+	    
+	    /*
+	    //maybe use this for DEMEANED
       var avg = 0;
       for (var  i =0; i < weightVectorUnhealthy.length; i++){
         avg += weightVectorUnhealthy[i];
@@ -157,6 +105,58 @@ body {font-family: "Lato", sans-serif;}
       for (var  i =1; i < deMeaneddataSet2.length; i++){
         deMeaneddataSet2[i].y = deMeaneddataSet2[i].y - avg;
       }
+      */
+	var deMeaned_dataSet = buildData(weightVector,dateVector,healthTypeVector);
+
+	for(var i = 0 ; i < weightVector.length; i++){
+		weightVector[i] = weightVector[i] + 70;
+	}  
+
+	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
+      //end of section
+    
+      //get max and min
+    var max = weightVectorUnhealthy[0];
+    var min = weightVectorUnhealthy[0];
+    
+      for(var i = 1 ; i < weightVectorUnhealthy.length; i++){
+        if(max < weightVectorUnhealthy[i])
+          max = weightVectorUnhealthy[i];
+        if(min > weightVectorUnhealthy[i])
+          min = weightVectorUnhealthy[i];
+      }  
+    
+      
+      
+      
+      
+      var healthy = true;
+      //highlight the unhealthy area
+    for(var i = 0; i < healthTypeVector.length; i++){
+     if (healthTypeVector[i] == "Unhealthy" ) {
+       unhealthyTrend();//change back later to unhealthy
+       healthy = false;
+	     i = healthTypeVector.length;
+     }
+    }
+	    
+      if(healthy){
+        healthyTrend();
+      }
+        //*/
+    var actualWeightChart = new CanvasJS.Chart("chartContainer",
+    {
+            axisY:{
+              title : "Weight (kg)",
+              minimum: min - 1,
+              maximum: max + 1
+            },
+      title: {
+        text: "Weight Trend"
+      },
+        data: dataSet
+    });
+      
       
       
       var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
@@ -167,16 +167,7 @@ body {font-family: "Lato", sans-serif;}
       title: {
         text: "Change in Weight"
       },
-        data: [
-      {
-        type: "area",
-        dataPoints: deMeaneddataSet
-      },{
-      
-        type: "area",
-        dataPoints: deMeaneddataSet2
-      }
-      ]
+        data: deMeaned_dataSet
     });
 
     actualWeightChart.render();
