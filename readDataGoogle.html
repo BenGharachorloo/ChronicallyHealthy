@@ -19,6 +19,7 @@
         var formattedResult = buildVectors(response.result.values);
         var dateVector = formattedResult[0];
         var weightVector = formattedResult[1];
+        var healthTypeVector = formattedResult[1];
         document.write(dateVector);
         
       }, function(reason) {
@@ -29,15 +30,18 @@
     
         var dateVector = new Array();
         var weightVector = new Array();
+        var healthTypeVector = new Array();
         for(var row = 1; row < result.length; row++){//skip one row for title of columns
           for (var col = 0; col < result[row].length ;col ++){
             if (col == 0)//the date column
               dateVector.push(result[row][col]);
             else if(col == 1)//the weight column
               weightVector.push(result[row][col]);
+            else if(col == 3)//the weight column
+              healthTypeVector.push(result[row][col]);
           }
         }
-      return [dateVector,weightVector];
+      return [dateVector,weightVector,healthTypeVector];
     
     }
     function initClient() {
