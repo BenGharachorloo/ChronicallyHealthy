@@ -64,7 +64,8 @@ var data = new Array();
 	else
 		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
 	}
-	return data
+        console.log(healthTypeVector);
+	return data;
 	}
     function makeApiCall() {
       var params = {
@@ -83,7 +84,10 @@ var data = new Array();
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[2];
 	      
-	      
+        console.log(dateVector);
+        console.log(weightVector);
+        console.log(healthTypeVector);
+	      document.write("asdadasdasdddd");
 	 
 	  //get avg
       var avg = 0;
@@ -129,9 +133,6 @@ var data = new Array();
      }
     }
 	      
-        console.log(dateVector);
-        console.log(weightVector);
-        console.log(healthTypeVector);
         console.log(dataSet);
         console.log(deMeaned_dataSet);
 	 var actualWeightChart = new CanvasJS.Chart("chartContainer",
