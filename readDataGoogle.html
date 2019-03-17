@@ -1,57 +1,48 @@
 <html>
   <head></head>
   <body>
-    <!--
-    BEFORE RUNNING:
-    ---------------
-    1. If not already done, enable the Google Sheets API
-       and check the quota for your project at
-       https://console.developers.google.com/apis/api/sheets
-    2. Get access keys for your application. See
-       https://developers.google.com/api-client-library/javascript/start/start-js#get-access-keys-for-your-application
-    3. For additional information on authentication, see
-       https://developers.google.com/sheets/api/quickstart/js#step_2_set_up_the_sample
-    -->
+
     <script>
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  // TODO: Update placeholder value.
-
-        // The A1 notation of the values to retrieve.
-        range: 'Sheet1',  // TODO: Update placeholder value.
-
-        // How values should be represented in the output.
-        // The default render option is ValueRenderOption.FORMATTED_VALUE.
-        //valueRenderOption: '',  // TODO: Update placeholder value.
-
-        // How dates, times, and durations should be represented in the output.
-        // This is ignored if value_render_option is
-        // FORMATTED_VALUE.
-        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-        //dateTimeRenderOption: '',  // TODO: Update placeholder value.
+        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
+        range: 'Sheet1'
       };
 
       var request = gapi.client.sheets.spreadsheets.values.get(params);
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
+        //what to do with result? 
+        //build weight Vector
+        var formattedResult = buildVectors(response.result.values);
+        var dateVector = formattedResult[0];
+        var weightVector = formattedResult[1];
+        document.write(dateVector);
+        
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
     }
-
+    function buildVectors(result){
+    
+        var dateVector = new Array();
+        var weightVector = new Array();
+        for(var row = 1; row < result.length; row++){//skip one row for title of columns
+          for (var col = 0; col < result[row].length  ;col ++){
+            if (col == 0)//the date column
+              dateVector.push(result[row][col]);
+            else if(col == 1)//the weight column
+              weightVector.push(result[row][col]);
+          }
+        }
+      return [dateVector,weightVector];
+    
+    }
     function initClient() {
-      var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  // TODO: Update placeholder with desired API key.
-
-      var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
-
-      // TODO: Authorize using one of the following scopes:
-      //   'https://www.googleapis.com/auth/drive'
-      //   'https://www.googleapis.com/auth/drive.file'
-      //   'https://www.googleapis.com/auth/drive.readonly'
-      //   'https://www.googleapis.com/auth/spreadsheets'
-      //   'https://www.googleapis.com/auth/spreadsheets.readonly'
+      var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  
+      var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  
       var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
       gapi.client.init({
