@@ -83,7 +83,7 @@ var data = new Array();
         var dateVector = formattedResult[0];
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[1];
-        document.write(weightVector);
+        document.write(healthTypeVector);
 	      
 	      
 	 
@@ -106,7 +106,30 @@ var data = new Array();
 	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
       //end of section
     
-        
+         //get max and min
+    var max = weightVector[0];
+    var min = weightVector[0];
+    
+      for(var i = 1 ; i < weightVector.length; i++){
+        if(max < weightVector[i])
+          max = weightVector[i];
+        if(min > weightVector[i])
+          min = weightVector[i];
+      }  
+    
+      
+      
+      
+      
+      var healthy = true;
+      //highlight the unhealthy area
+    for(var i = 0; i < healthTypeVector.length; i++){
+     if (healthTypeVector[i] == "Unhealthy" ) {
+       unhealthyTrend();//change back later to unhealthy
+       healthy = false;
+	     i = healthTypeVector.length;
+     }
+    }
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
