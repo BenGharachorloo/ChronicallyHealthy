@@ -35,12 +35,11 @@
       elem.style.backgroundColor = "#7CF280";
     }
 	  function whichColor(healthType){
-	if(healthType == "Indeterminate")
-    	return "gray"
 	if(healthType == "Healthy")
-    	return "blue"
+    		return "blue"
 	if(healthType == "Unhealthy")
-    	return "red"
+    		return "red"
+	return "gray" //else it's undetermined => return grey
 }
 function buildData(weightVector,dateVector,healthTypeVector){
 var data = new Array();
