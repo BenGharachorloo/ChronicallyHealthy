@@ -83,7 +83,6 @@ var data = new Array();
         var dateVector = formattedResult[0];
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[1];
-        console.log(formattedResult);
 	      
 	      
 	 
@@ -131,6 +130,8 @@ var data = new Array();
      }
     }
 	      
+        console.log(dataSet);
+        console.log(deMeaned_dataSet);
 	 var actualWeightChart = new CanvasJS.Chart("chartContainer",
     {
             axisY:{
@@ -228,14 +229,13 @@ var data = new Array();
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-    <p>ACK THIS is content</p>
 	  <div style = "margin-left:20%;">
-    <div>
-      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
-      <br>
-      <br>
-      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
-    </div>
-  </div>
+	    <div>
+	      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
+	      <br>
+	      <br>
+	      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
+	    </div>
+  	</div>
   </body>
 </html>
