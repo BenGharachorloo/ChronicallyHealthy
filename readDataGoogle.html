@@ -16,7 +16,7 @@
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '1KEuDZx8T_4RcgN2oJ2i5qAYbAgcR_EcsVwXyahDwORk',  // TODO: Update placeholder value.
+        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  // TODO: Update placeholder value.
 
         // The A1 notation of the values to retrieve.
         range: 'Sheet1',  // TODO: Update placeholder value.
@@ -36,16 +36,15 @@
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
-        populateSheet(response.result);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
     }
 
     function initClient() {
-      var API_KEY = 'AIzaSyBS-8cOzSh-PUEDV3PyfOkf4MgKPLbHFNs';  // TODO: Update placeholder with desired API key.
+      var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  // TODO: Update placeholder with desired API key.
 
-      var CLIENT_ID = '601856286782-vrcvif6kfbhv7v05tb0ncdnb1hnmuga4.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+      var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
 
       // TODO: Authorize using one of the following scopes:
       //   'https://www.googleapis.com/auth/drive'
@@ -83,18 +82,6 @@
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
     }
-	function populateSheet(result){
-	console.log("hello");
-			document.write("Hello World!");
-		for (var row = 0; row < result.values.length; row++){
-			for(var col = 0; col < result.values[row].length; col++){
-				document.write(result.values[row][col]);
-			}
-		}
-		
-	}
-	
-	
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
