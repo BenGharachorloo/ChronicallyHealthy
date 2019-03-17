@@ -121,16 +121,19 @@ var data = new Array();
       
       
       
-      /*
+      
       var healthy = true;
       //highlight the unhealthy area
-    for(var i = 0; i < healthTypeVector.length; i++){
-     if (healthTypeVector[i] == "Unhealthy" ) {
+     if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
        unhealthyTrend();//change back later to unhealthy
        healthy = false;
 	     i = healthTypeVector.length;
      }
-    }
+    
+	    
+      if(healthy){
+        healthyTrend();
+      }
 	  //*/    
         console.log(dataSet);
         console.log(deMeaned_dataSet);
@@ -231,13 +234,21 @@ var data = new Array();
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-	  <div style = "margin-left:20%;">
-	    <div>
-	      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
-	      <br>
-	      <br>
-	      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
-	    </div>
-  	</div>
+  <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
+      <div id="warning" >
+        <p>Warning:</p>
+        <p>An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician. Click here for more information.</p>
+      </div>
+    </div>
+  <br>
+  <br>
+  <div style = "margin-left:20%;">
+    <div>
+      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
+      <br>
+      <br>
+      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
+    </div>
+  </div>
   </body>
 </html>
