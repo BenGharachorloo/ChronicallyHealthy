@@ -130,6 +130,49 @@ var data = new Array();
 	     i = healthTypeVector.length;
      }
     }
+	      
+	 var actualWeightChart = new CanvasJS.Chart("chartContainer",
+    {
+            axisY:{
+              title : "Weight (kg)",
+              minimum: min - 1,
+              maximum: max + 1
+            },
+      title: {
+        text: "Weight Trend"
+      },
+        data: dataSet
+    });
+      
+      
+      
+      var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
+    {
+            axisY:{
+              title : "Weight (kg)"
+            },
+      title: {
+        text: "Change in Weight"
+      },
+        data: deMeaned_dataSet
+    });
+	      
+	      
+	      
+    actualWeightChart.render();
+    deMeanedChart.render();     
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+	      
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
