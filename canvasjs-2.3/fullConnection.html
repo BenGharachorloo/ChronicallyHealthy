@@ -5,10 +5,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
   <script>
-	  
+	  /*
         var dateVector;
         var weightVector;
-        var healthTypeVector;
+        var healthTypeVector;//*/
     function unhealthyTrend(){
 		
 		var line1 = "Warning: An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician.";
@@ -75,8 +75,8 @@ var data = new Array();
 	  
 	  
 	  //this is THE function
-	  window.onload = function () {
-	      document.write("YARHARHARHARHAR");
+	  function buildGraph(weightVector,dateVector,healthTypeVector){
+	      document.write("LARBOBOBOBBO");
 	    //get avg
       var avg = 0;
       for (var  i =0; i < weightVector.length; i++){
@@ -173,15 +173,15 @@ var data = new Array();
         //what to do with result? 
         //build weight Vector
         var formattedResult = buildVectors(response.result.values);
-         dateVector = formattedResult[0];
-         weightVector = formattedResult[1];
-         healthTypeVector = formattedResult[2];
+         var dateVector = formattedResult[0];
+         var weightVector = formattedResult[1];
+         var healthTypeVector = formattedResult[2];
 	      /*
         console.log(dateVector);
         console.log(weightVector);
         console.log(healthTypeVector);//*/
 	 
-	
+	 buildGraph(weightVector,dateVector,healthTypeVector);
 	      
 	      
 	      
