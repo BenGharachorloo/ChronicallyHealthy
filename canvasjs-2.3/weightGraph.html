@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
 <style>
 body {font-family: "Lato", sans-serif;}
-
   
 .warningStyle {
   font-size: 36px;
@@ -33,7 +32,6 @@ body {font-family: "Lato", sans-serif;}
 		para1.appendChild(line1);
 		para2.appendChild(line2);
         var warningElem = document.createElement("div");
-
 	  warningElem.appendChild(para1);
 	  warningElem.appendChild(para2);
 	  var oldWarningID = document.getElementById("warning");
@@ -41,7 +39,6 @@ body {font-family: "Lato", sans-serif;}
 	  
 	  parent = oldWarningID.parentNode;
 	  parent.insertBefore(warningElem, oldWarningID);
-
 	  // Remove the original
 	  parent.removeChild(oldWarningID);//*/
     }
@@ -52,10 +49,16 @@ body {font-family: "Lato", sans-serif;}
         "You have a healthy weight trend. Thank you for monitoring your weight.";
       elem.style.backgroundColor = "#7CF280";
     }
-	  
+	  function whichColor(healthType){
+	if(healthType == "Indeterminate")
+    	return "gray"
+	if(healthType == "Healthy")
+    	return "blue"
+	if(healthType == "Unhealthy")
+    	return "red"
+}
 function buildData(weightVector,dateVector,healthTypeVector){
 var data = new Array();
-
 	var dataSeries = {};
 	dataSeries.type = "area";
 	dataSeries.color = whichColor(healthTypeVector[0]);
@@ -63,9 +66,9 @@ var data = new Array();
 	dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
 	data.push(dataSeries);
     j = 0;
-
 	for(var i = 1; i < weightVector.length; i++){
 	if (healthTypeVector[i] != healthTypeVector[i-1]){
+		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
 		var dataSeries = {};
 		dataSeries.type = "area";
 		dataSeries.color = whichColor(healthTypeVector[i]);
@@ -77,53 +80,51 @@ var data = new Array();
 	else
 		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
 	}
-
 	return data
 	}
-
-
     window.onload = function () {
        //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
       
 	 var weightVector= [-1,-0.2,-0.2,1.1,1.3,1.25,2.3];
-	var dateVector = ["Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7"];
-	var healthTypeVector = ["Indeterminate","Indeterminate","Healthy","Healthy","Healthy","Unhealthy","Unhealthy"];
-	    
-	    /*
-	    //maybe use this for DEMEANED
-      var avg = 0;
-      for (var  i =0; i < weightVectorUnhealthy.length; i++){
-        avg += weightVectorUnhealthy[i];
-      }
-      avg = avg / weightVectorUnhealthy.length;
-      avg = Math.round( avg * 10 ) / 10;
-      
-      for (var  i =0; i < deMeaneddataSet.length; i++){
-        deMeaneddataSet[i].y = deMeaneddataSet[i].y - avg;
-      }
-      
-      for (var  i =1; i < deMeaneddataSet2.length; i++){
-        deMeaneddataSet2[i].y = deMeaneddataSet2[i].y - avg;
-      }
-      */
-	var deMeaned_dataSet = buildData(weightVector,dateVector,healthTypeVector);
-
 	for(var i = 0 ; i < weightVector.length; i++){
 		weightVector[i] = weightVector[i] + 70;
 	}  
+	var dateVector = ["Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7"];
+	var healthTypeVector = ["Healthy","Indeterminate","Healthy","Healthy","Healthy","Unhealthy","Unhealthy"];
+		//read the above from a file
 
+
+
+
+	 
+	  //get avg
+      var avg = 0;
+      for (var  i =0; i < weightVector.length; i++){
+        avg += weightVector[i];
+      }
+      avg = avg / weightVector.length;
+      avg = Math.round( avg * 10 ) / 10;
+      
+	  
+	  
+	  var deMeaned_weightVector = new Array();
+	  for (var  i =0; i < weightVector.length; i++){
+		deMeaned_weightVector.push(weightVector[i] - avg);
+	  }
 	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
+	  
+	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
       //end of section
     
       //get max and min
-    var max = weightVectorUnhealthy[0];
-    var min = weightVectorUnhealthy[0];
+    var max = weightVector[0];
+    var min = weightVector[0];
     
-      for(var i = 1 ; i < weightVectorUnhealthy.length; i++){
-        if(max < weightVectorUnhealthy[i])
-          max = weightVectorUnhealthy[i];
-        if(min > weightVectorUnhealthy[i])
-          min = weightVectorUnhealthy[i];
+      for(var i = 1 ; i < weightVector.length; i++){
+        if(max < weightVector[i])
+          max = weightVector[i];
+        if(min > weightVector[i])
+          min = weightVector[i];
       }  
     
       
@@ -169,7 +170,6 @@ var data = new Array();
       },
         data: deMeaned_dataSet
     });
-
     actualWeightChart.render();
     deMeanedChart.render();
   }
