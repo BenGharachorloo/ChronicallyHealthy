@@ -83,86 +83,8 @@ var data = new Array();
         var dateVector = formattedResult[0];
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[1];
-        
+        document.write(dateVector);
 	      
-	      
-	      
-	      
-	       var avg = 0;
-      for (var  i =0; i < weightVector.length; i++){
-        avg += weightVector[i];
-      }
-      avg = avg / weightVector.length;
-      avg = Math.round( avg * 10 ) / 10;
-      
-	  
-	  
-	  var deMeaned_weightVector = new Array();
-	  for (var  i =0; i < weightVector.length; i++){
-		deMeaned_weightVector.push(weightVector[i] - avg);
-	  }
-	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
-	  
-	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
-      //end of section
-    
-      //get max and min
-    var max = weightVector[0];
-    var min = weightVector[0];
-    
-      for(var i = 1 ; i < weightVector.length; i++){
-        if(max < weightVector[i])
-          max = weightVector[i];
-        if(min > weightVector[i])
-          min = weightVector[i];
-      }  
-    
-      
-      
-      
-      
-      var healthy = true;
-      //highlight the unhealthy area
-    for(var i = 0; i < healthTypeVector.length; i++){
-     if (healthTypeVector[i] == "Unhealthy" ) {
-       unhealthyTrend();//change back later to unhealthy
-       healthy = false;
-	     i = healthTypeVector.length;
-     }
-    }
-	    
-      if(healthy){
-        healthyTrend();
-      }
-        //*/
-    var actualWeightChart = new CanvasJS.Chart("chartContainer",
-    {
-            axisY:{
-              title : "Weight (kg)",
-              minimum: min - 1,
-              maximum: max + 1
-            },
-      title: {
-        text: "Weight Trend"
-      },
-        data: dataSet
-    });
-      
-      
-      
-      var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
-    {
-            axisY:{
-              title : "Weight (kg)"
-            },
-      title: {
-        text: "Change in Weight"
-      },
-        data: deMeaned_dataSet
-    });
-    actualWeightChart.render();
-    deMeanedChart.render();
-  
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
