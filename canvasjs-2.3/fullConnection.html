@@ -1,96 +1,14 @@
 <html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
-  <style>
-  body {font-family: "Lato", sans-serif;}
-  
-.warningStyle {
-  font-size: 36px;
-  font-weight: bold;
-  color: #000000;
-  padding: 0px 10px;
-  background-color:#F2807C;
-  margin-left: 15%;
-  
-  </style>
-  <script type="text/javascript" src="canvasjs.min.js"></script>
-  <script type="text/javascript">
-  </head>
+  <head></head>
   <body>
 
     <script>
-	function unhealthyTrend(){
-		
-		var line1 = "Warning: An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician.";
-		var line2 = "Click here for more information.";
-		var para1 = document.createElement("p");
-		var para2 = document.createElement("p");
-        var line1  = document.createTextNode(line1 );
-        var line2  = document.createTextNode(line2);
-		
-		
-		para1.appendChild(line1);
-		para2.appendChild(line2);
-        var warningElem = document.createElement("div");
-	  warningElem.appendChild(para1);
-	  warningElem.appendChild(para2);
-	  var oldWarningID = document.getElementById("warning");
-	  
-	  
-	  parent = oldWarningID.parentNode;
-	  parent.insertBefore(warningElem, oldWarningID);
-	  // Remove the original
-	  parent.removeChild(oldWarningID);//*/
-    }
-    function healthyTrend(){
-      //element
-      var elem = document.getElementById("warningContainer")
-      elem.innerHTML = 
-        "You have a healthy weight trend. Thank you for monitoring your weight.";
-      elem.style.backgroundColor = "#7CF280";
-    }
-	  function whichColor(healthType){
-	if(healthType == "Indeterminate")
-    	return "gray"
-	if(healthType == "Healthy")
-    	return "blue"
-	if(healthType == "Unhealthy")
-    	return "red"
-}
-function buildData(weightVector,dateVector,healthTypeVector){
-var data = new Array();
-	var dataSeries = {};
-	dataSeries.type = "area";
-	dataSeries.color = whichColor(healthTypeVector[0]);
-	dataSeries.dataPoints = new Array();
-	dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
-	data.push(dataSeries);
-    j = 0;
-	for(var i = 1; i < weightVector.length; i++){
-	if (healthTypeVector[i] != healthTypeVector[i-1]){
-		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
-		var dataSeries = {};
-		dataSeries.type = "area";
-		dataSeries.color = whichColor(healthTypeVector[i]);
-		dataSeries.dataPoints = new Array();
-		dataSeries.dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
-		data.push(dataSeries);
-	    j++;
-	}
-	else
-		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
-	}
-	return data
-	}
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
         range: 'Test'
       };
-
       var request = gapi.client.sheets.spreadsheets.values.get(params);
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
@@ -101,22 +19,8 @@ var data = new Array();
         var dateVector = formattedResult[0];
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[1];
-	document.write("<br>");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("<br>");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("<br>");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("<br>");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACK");
-	document.write("<br>");
-	document.write("ACKACKACKAKCAKCKACKACKACKACKACKACKAKCAKCKACKACKACKACKA   ");
-	document.write(dateVector[0]);
+        document.write(dateVector);
+        
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
@@ -143,7 +47,6 @@ var data = new Array();
       var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  
       var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  
       var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
-
       gapi.client.init({
         'apiKey': API_KEY,
         'clientId': CLIENT_ID,
@@ -154,21 +57,17 @@ var data = new Array();
         updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
       });
     }
-
     function handleClientLoad() {
       gapi.load('client:auth2', initClient);
     }
-
     function updateSignInStatus(isSignedIn) {
       if (isSignedIn) {
         makeApiCall();
       }
     }
-
     function handleSignInClick(event) {
       gapi.auth2.getAuthInstance().signIn();
     }
-
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
     }
@@ -177,21 +76,6 @@ var data = new Array();
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-	
-	
-
-    <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
-      <div id="warning" >
-        <p>Warning:</p>
-        <p>An uackackackaack rmation. Please contact your physician. Click here for more information.</p>
-      </div>
-    </div>
-  <br>
-  <br>
-  <div style = "margin-left:20%;">
-    <div>
-      <br>
-    </div>
-  </div>
-</body>
+    <p>HELLO this is content</p>
+  </body>
 </html>
