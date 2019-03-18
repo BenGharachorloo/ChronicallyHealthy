@@ -126,19 +126,16 @@ var data = new Array();
         spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
         range: 'Test'
       };
+      var result ;
       var request = gapi.client.sheets.spreadsheets.values.get(params);
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
         //what to do with result? 
         //build weight Vector
-         var result =  buildVectors(response.result.values);
+          result =  buildVectors(response.result.values);
 	      
 	  
-         dateVector = result[0];
-         weightVector = result[1];
-         healthTypeVector = result[2];
-	      buildGraph(weightVector,dateVector,healthTypeVector) ;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
@@ -146,8 +143,11 @@ var data = new Array();
     }
 	  
     //window.onload = function 
- /* makeApiCall().then(function(result) {
+  request.then(function(response) {
 	  
+        console.log("hello");
+        console.log(dateVector);
+        console.log(dateVector);
          dateVector = result[0];
          weightVector = result[1];
          healthTypeVector = result[2];
