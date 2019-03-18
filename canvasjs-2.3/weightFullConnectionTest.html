@@ -156,7 +156,7 @@ var data = new Array();
     function buildGraph(weightVector,dateVector,healthTypeVector) {
 	    //var streetaddress= addy.substr(0, addy.indexOf(',')); 
 	    for (var d = 0; d < dateVector.length; d++){
-	    	dateVector[d] = dateVector.substr(0, dateVector.indexOf(','));
+	    	dateVector[d] = dateVector[d].substr(0, dateVector[d].indexOf(','));
 	    }
 	    
         console.log(dateVector);
