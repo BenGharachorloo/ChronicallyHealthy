@@ -132,8 +132,13 @@ var data = new Array();
         console.log(response.result);
         //what to do with result? 
         //build weight Vector
-         return buildVectors(response.result.values);
+         var result =  buildVectors(response.result.values);
 	      
+	  
+         dateVector = result[0];
+         weightVector = result[1];
+         healthTypeVector = result[2];
+	      buildGraph(weightVector,dateVector,healthTypeVector) ;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
@@ -141,13 +146,13 @@ var data = new Array();
     }
 	  
     //window.onload = function 
-  makeApiCall().then(function(result) {
+ /* makeApiCall().then(function(result) {
 	  
          dateVector = result[0];
          weightVector = result[1];
          healthTypeVector = result[2];
 	      buildGraph(weightVector,dateVector,healthTypeVector) ;
-});
+});//*/
     function buildGraph(weightVector,dateVector,healthTypeVector) {
 	    
         console.log(dateVector);
