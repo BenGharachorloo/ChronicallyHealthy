@@ -126,24 +126,20 @@ var data = new Array();
         spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
         range: 'Test'
       };
-      var result ;
+      //var result ;
       var request = gapi.client.sheets.spreadsheets.values.get(params);
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
         //what to do with result? 
         //build weight Vector
-          result =  buildVectors(response.result.values);
+          var result =  buildVectors(response.result.values);
 	      
-	  
+	  return result;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
-      });
-    }
-	  
-    //window.onload = function 
-  request.then(function(response) {
+      }).then(function(result) {
 	  
         console.log("hello");
         console.log(dateVector);
@@ -152,7 +148,10 @@ var data = new Array();
          weightVector = result[1];
          healthTypeVector = result[2];
 	      buildGraph(weightVector,dateVector,healthTypeVector) ;
-});//*/
+});
+    }
+	  
+    //window.onload = function 
     function buildGraph(weightVector,dateVector,healthTypeVector) {
 	    //var streetaddress= addy.substr(0, addy.indexOf(',')); 
 	    for (var d = 0; d < dateVector.length; d++){
