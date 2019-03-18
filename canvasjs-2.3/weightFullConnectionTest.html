@@ -204,20 +204,14 @@ var data = new Array();
       
         console.log(dataSet);
       
-     /* 
-      var healthy = true;
+     
       //highlight the unhealthy area
-    for(var i = 0; i < healthTypeVector.length; i++){
-     if (healthTypeVector[i] == "Unhealthy" ) {
-       unhealthyTrend();//change back later to unhealthy
-       healthy = false;
-	     i = healthTypeVector.length;
-     }
-    }
-	    
-      if(healthy){
-        healthyTrend();
-      }
+     	if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
+	       unhealthyTrend();//change back later to unhealthy
+	}
+    	else{
+		healthyTrend();
+        }
         //*/
     var actualWeightChart = new CanvasJS.Chart("chartContainer",
     {
