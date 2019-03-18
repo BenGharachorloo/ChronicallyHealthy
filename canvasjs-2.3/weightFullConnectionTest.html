@@ -93,7 +93,7 @@ var data = new Array();
 		//read the above from a file*/
 	 
     //window.onload = function 
-    function buildData(weightVector,dateVector,healthTypeVector) {
+    function buildGraph(weightVector,dateVector,healthTypeVector) {
 	  //get avg
       var avg = 0;
       for (var  i =0; i < weightVector.length; i++){
@@ -188,7 +188,7 @@ var data = new Array();
         var weightVector = formattedResult[1];
         var healthTypeVector = formattedResult[2];
         document.write(weightVector);
-	       buildData(weightVector,dateVector,healthTypeVector) ;
+	       buildGraph(weightVector,dateVector,healthTypeVector) ;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
