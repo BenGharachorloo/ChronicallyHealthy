@@ -125,8 +125,11 @@ var data = new Array();
 	    //var streetaddress= addy.substr(0, addy.indexOf(',')); 
 	    for (var d = 0; d < dateVector.length; d++){
 	    	dateVector[d] = dateVector[d].substr(0, dateVector[d].indexOf(','));
-	    }
+	    }//
 	    
+	    for (var d = 0; d < weightVector.length; d++){
+	    	weightVector[d] = parseInt(weightVector[d], 10);
+	    }
         console.log(dateVector);
         console.log(weightVector);
         console.log(healthTypeVector);//testing console log **hopefully it logs it right
