@@ -116,7 +116,7 @@ body {font-family: "Lato", sans-serif;}
       </div>
       <div class="card" style="position: absolute; left: 46.4%; top: 100px;">
         <div class="container">
-          <h4><b><?php echo $emergencyContact[0];?> (Primary Caregiver)</b></h4>
+          <h4><b><?php echo $emergencyContact[0];?> (Emergency Contact)</b></h4>
           <p><i>TEL: <?php echo $emergencyContact[1];?></i></p>
           <p><i>EMAIL: <?php echo $emergencyContact[2];?></i></p>
           <p><i>FAX: <?php echo $emergencyContact[3];?></i></p>
