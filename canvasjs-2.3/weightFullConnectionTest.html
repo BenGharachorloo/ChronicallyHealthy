@@ -200,6 +200,9 @@ var data = new Array();
     deMeanedChart.render();
   }
     
+        var dateVector;
+        var weightVector;
+        var healthTypeVector;
      function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
@@ -213,18 +216,18 @@ var data = new Array();
         //what to do with result? 
         //build weight Vector
         var formattedResult = buildVectors(response.result.values);
-        var dateVector = formattedResult[0];
-        var weightVector = formattedResult[1];
-        var healthTypeVector = formattedResult[2];
-        document.write(weightVector);
-	      for(var waste = 0; waste < 10000; waste++){
-	      	var ello;//wait to start graph thing
-	      }
+         dateVector = formattedResult[0];
+         weightVector = formattedResult[1];
+         healthTypeVector = formattedResult[2];
+        document.write(healthTypeVector);
 	      
-	       buildGraph(weightVector,dateVector,healthTypeVector) ;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
+      }).then(function(weightVector,dateVector,healthTypeVector){
+        document.write(dateVector);
+      	
+	       buildGraph(weightVector,dateVector,healthTypeVector) ;
       });
     }
     function buildVectors(result){
