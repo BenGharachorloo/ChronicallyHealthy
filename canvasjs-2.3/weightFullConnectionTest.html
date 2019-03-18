@@ -203,6 +203,7 @@ var data = new Array();
         var dateVector;
         var weightVector;
         var healthTypeVector;
+        console.log(dateVector);
      function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to retrieve data from.
@@ -219,15 +220,13 @@ var data = new Array();
          dateVector = formattedResult[0];
          weightVector = formattedResult[1];
          healthTypeVector = formattedResult[2];
-        document.write(healthTypeVector);
-	      
+        console.log(dateVector);
+        console.log(weightVector);
+        console.log(healthTypeVector);
+	      //buildGraph(weightVector,dateVector,healthTypeVector) ;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
-      }).then(function(weightVector,dateVector,healthTypeVector){
-        document.write(dateVector);
-      	
-	       buildGraph(weightVector,dateVector,healthTypeVector) ;
       });
     }
     function buildVectors(result){
