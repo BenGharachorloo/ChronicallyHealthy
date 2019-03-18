@@ -93,13 +93,13 @@ body {font-family: "Lato", sans-serif;}
  
   <div class="sidebar">
     
-    <a href="http://localhost/ChronicallyHealthy/canvasjs-2.3/weightGraph.php"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="http://localhost/ChronicallyHealthy/weightHistory.php"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="http://localhost/ChronicallyHealthy/preVisitAssessment.php"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
-    <a href="http://localhost/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
-    <a href="http://localhost/ChronicallyHealthy/about.php"><i class="fa fa-fw fa-info-circle"></i> About</a>
-    <a href="http://localhost/ChronicallyHealthy/userGuide.php"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
-  </div>
+  <a href="http://https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="http://https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="http://https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="http://https://bengharachorloo.github.io/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+    <a href="http://https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
+    </div>
   <br>
   <br>
   <div style = "margin-left:20%;">
