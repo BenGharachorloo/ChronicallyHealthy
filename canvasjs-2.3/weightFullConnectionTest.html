@@ -116,7 +116,38 @@ var data = new Array();
        //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
     
 	 
+    
+        var dateVector;
+        var weightVector;
+        var healthTypeVector;
+     function makeApiCall() {
+      var params = {
+        // The ID of the spreadsheet to retrieve data from.
+        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
+        range: 'Test'
+      };
+      var request = gapi.client.sheets.spreadsheets.values.get(params);
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        console.log(response.result);
+        //what to do with result? 
+        //build weight Vector
+         return buildVectors(response.result.values);
+	      
+        
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
+	  
     //window.onload = function 
+  makeApiCall().then(function(result) {
+	  
+         dateVector = result[0];
+         weightVector = result[1];
+         healthTypeVector = result[2];
+	      buildGraph(weightVector,dateVector,healthTypeVector) ;
+});
     function buildGraph(weightVector,dateVector,healthTypeVector) {
 	    
         console.log(dateVector);
@@ -207,32 +238,7 @@ var data = new Array();
     actualWeightChart.render();
     deMeanedChart.render();
   }
-    
-        var dateVector;
-        var weightVector;
-        var healthTypeVector;
-     function makeApiCall() {
-      var params = {
-        // The ID of the spreadsheet to retrieve data from.
-        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
-        range: 'Test'
-      };
-      var request = gapi.client.sheets.spreadsheets.values.get(params);
-      request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result);
-        //what to do with result? 
-        //build weight Vector
-        var formattedResult = buildVectors(response.result.values);
-         dateVector = formattedResult[0];
-         weightVector = formattedResult[1];
-         healthTypeVector = formattedResult[2];
-	      buildGraph(weightVector,dateVector,healthTypeVector) ;
-        
-      }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-      });
-    }
+	  
     function buildVectors(result){
     
         var dateVector = new Array();
