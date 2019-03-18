@@ -47,6 +47,17 @@ tr:nth-child(even) {
         //weightVector[t].toString()
          newText  = document.createTextNode(weight);
         newCell.appendChild(newText);
+	     
+	     
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(2);
+		var healthType = healthTypeVector[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(healthType);
+        newCell.appendChild(newText);
+	     
+	     
   		document.getElementById("weightTable").appendChild(newRow);
   
   	}
