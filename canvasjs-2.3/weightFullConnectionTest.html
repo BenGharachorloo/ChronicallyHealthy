@@ -19,36 +19,7 @@ body {font-family: "Lato", sans-serif;}
 </style>
   <script type="text/javascript" src="canvasjs.min.js"></script>
 	
-	</head>
- 
-<body>
-  <div class="sidebar">
-    
-    <a href="http://localhost/ChronicallyHealthy/canvasjs-2.3/weightGraph.php"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="http://localhost/ChronicallyHealthy/weightHistory.php"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="http://localhost/ChronicallyHealthy/preVisitAssessment.php"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
-    <a href="http://localhost/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
-    <a href="http://localhost/ChronicallyHealthy/about.php"><i class="fa fa-fw fa-info-circle"></i> About</a>
-    <a href="http://localhost/ChronicallyHealthy/userGuide.php"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
-  </div>
-    <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
-      <div id="warning" >
-        <p>Warning:</p>
-        <p>An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician. Click here for more information.</p>
-      </div>
-    </div>
-  <br>
-  <br>
 	
-        <p>Warning:</p>
-  <div style = "margin-left:20%;">
-    <div>
-      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
-      <br>
-      <br>
-      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
-    </div>
-  </div>
   <script type="text/javascript">
     function unhealthyTrend(){
 		
@@ -294,6 +265,35 @@ var data = new Array();
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-
+</head>
+ 
+<body>
+  <div class="sidebar">
+    
+    <a href="http://localhost/ChronicallyHealthy/canvasjs-2.3/weightGraph.php"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="http://localhost/ChronicallyHealthy/weightHistory.php"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="http://localhost/ChronicallyHealthy/preVisitAssessment.php"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="http://localhost/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+    <a href="http://localhost/ChronicallyHealthy/about.php"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://localhost/ChronicallyHealthy/userGuide.php"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
+  </div>
+    <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
+      <div id="warning" >
+        <p>Warning:</p>
+        <p>An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician. Click here for more information.</p>
+      </div>
+    </div>
+  <br>
+  <br>
+	
+        <p>Warning:</p>
+  <div style = "margin-left:20%;">
+    <div>
+      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
+      <br>
+      <br>
+      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
+    </div>
+  </div>
 </body>
 </html>
