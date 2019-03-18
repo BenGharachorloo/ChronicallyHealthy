@@ -8,7 +8,7 @@ if(file_exists($filename)){
 	$file = fopen("contacts.txt","r");
 	$i = 0;
 	$patient = array("name","telephone","email","fax");
-	$caretaker = array("name","telephone","email","fax");
+	$emergencyContact = array("name","telephone","email","fax");
 	$physician = array("name","telephone","email","fax");
 	if($file){ //double check if file is open
 		while(! feof($file)){
@@ -16,7 +16,7 @@ if(file_exists($filename)){
 				$patient[$i%4] = fgets($file);	
 			}	
 			else if (($i/4)<2){
-				$caretaker[$i%4] = fgets($file);
+				$emergencyContact[$i%4] = fgets($file);
 			}
 			else if (($i/4)<3){
 				$physician[$i%4] = fgets($file);
@@ -116,10 +116,10 @@ body {font-family: "Lato", sans-serif;}
       </div>
       <div class="card" style="position: absolute; left: 46.4%; top: 100px;">
         <div class="container">
-          <h4><b><?php echo $caretaker[0];?> (Primary Caregiver)</b></h4>
-          <p><i>TEL: <?php echo $caretaker[1];?></i></p>
-          <p><i>EMAIL: <?php echo $caretaker[2];?></i></p>
-          <p><i>FAX: <?php echo $caretaker[3];?></i></p>
+          <h4><b><?php echo $emergencyContact[0];?> (Primary Caregiver)</b></h4>
+          <p><i>TEL: <?php echo $emergencyContact[1];?></i></p>
+          <p><i>EMAIL: <?php echo $emergencyContact[2];?></i></p>
+          <p><i>FAX: <?php echo $emergencyContact[3];?></i></p>
         </div>
       </div>
       <div class="card" style="position: absolute; left: 72.8%; top: 100px;">
