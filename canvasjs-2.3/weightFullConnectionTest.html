@@ -154,6 +154,10 @@ var data = new Array();
 	      buildGraph(weightVector,dateVector,healthTypeVector) ;
 });//*/
     function buildGraph(weightVector,dateVector,healthTypeVector) {
+	    //var streetaddress= addy.substr(0, addy.indexOf(',')); 
+	    for (var d = 0; d < dateVector.length, d++){
+	    	dateVector[d] = dateVector.substr(0, dateVector.indexOf(','));
+	    }
 	    
         console.log(dateVector);
         console.log(weightVector);
