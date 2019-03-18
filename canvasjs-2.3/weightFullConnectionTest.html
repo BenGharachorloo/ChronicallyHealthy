@@ -141,9 +141,7 @@ var data = new Array();
         console.error('error: ' + reason.result.error.message);
       }).then(function(result) {
 	  
-        console.log("hello");
-        console.log(dateVector);
-        console.log(dateVector);
+        console.log("bye");
          dateVector = result[0];
          weightVector = result[1];
          healthTypeVector = result[2];
@@ -169,15 +167,7 @@ var data = new Array();
 	 dateVector = ["Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7"];
 	 healthTypeVector = ["Healthy","Indeterminate","Healthy","Healthy","Healthy","Unhealthy","Unhealthy"];
 		//read the above from a file*/
-	    while(typeof dateVector == 'undefined'){
-		  //wait until it gets teh vector from website REMOVE************************************************************************************************************************
-		  }
-	    while(typeof weightVector == 'undefined'){
-		  //wait until it gets teh vector from website REMOVE************************************************************************************************************************
-		  }
-	    while(typeof healthTypeVector == 'undefined'){
-		  //wait until it gets teh vector from website REMOVE************************************************************************************************************************
-		  }
+	    
 	    
 	  //get avg
       var avg = 0;
