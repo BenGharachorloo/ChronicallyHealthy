@@ -24,7 +24,7 @@ tr:nth-child(even) {
   <body>
 
     <script>
-    function buildTable(weightVector,dateVector,healthTypeVector){
+    function buildTable(weightVector,dateVector,healthTypeVector,daysSinceReset){
     
     var numDays = weightVector.length;
     
@@ -55,6 +55,16 @@ tr:nth-child(even) {
         // Append a text node to the cell
         //weightVector[t].toString()
          newText  = document.createTextNode(healthType);
+        newCell.appendChild(newText);
+	     
+	     
+	     
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(3);
+		var daysSince = daysSinceReset[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(daysSince);
         newCell.appendChild(newText);
 	     
 	     
@@ -94,7 +104,8 @@ tr:nth-child(even) {
          dateVector = result[0];
          weightVector = result[1];
          healthTypeVector = result[2];
-	      buildTable(weightVector,dateVector,healthTypeVector) ;
+	 daysSinceReset = result[3];
+	      buildTable(weightVector,dateVector,healthTypeVector,daysSinceReset) ;
 });
     }
     function buildVectors(result){
@@ -102,6 +113,7 @@ tr:nth-child(even) {
         var dateVector = new Array();
         var weightVector = new Array();
         var healthTypeVector = new Array();
+        var daysSinceReset = new Array();
         for(var row = 1; row < result.length; row++){//skip one row for title of columns
           for (var col = 0; col < result[row].length ;col ++){
             if (col == 0)//the date column
@@ -110,9 +122,11 @@ tr:nth-child(even) {
               weightVector.push(result[row][col]);
             else if(col == 3)//the weight column
               healthTypeVector.push(result[row][col]);
+            else if(col == 2)//the weight column
+              daysSinceReset.push(result[row][col]);
           }
         }
-      return [dateVector,weightVector,healthTypeVector];
+      return [dateVector,weightVector,healthTypeVector,daysSinceReset];
     
     }
     function initClient() {
@@ -165,6 +179,8 @@ tr:nth-child(even) {
       <tr>
         <th>Date</th>
         <th>Weight</th>
+        <th>Health Status</th>
+        <th>Days Since Last Reset / Clinic Visit</th>
       </tr>
       
     </table>
