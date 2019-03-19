@@ -130,8 +130,14 @@ var data = new Array();
 	    for (var d = 0; d < weightVector.length; d++){
 	    	weightVector[d] = parseFloat(weightVector[d], 10);
 	    }
+	    var weightVectorPounds = new Array(weightVector.length);
+	    for (var d = 0; d < weightVector.length; d++){
+	    	weightVectorPounds[d] = 2.20462*weightVector[d];
+	    }
+	    //axisYIndex: 1,
         console.log(dateVector);
         console.log(weightVector);
+        console.log(weightVectorPounds);
         console.log(healthTypeVector);//testing console log **hopefully it logs it right
 	      
 	 /* weightVector= [-1,-0.2,-0.2,1.1,1.3,1.25,2.3];
@@ -149,17 +155,24 @@ var data = new Array();
         avg += weightVector[i];
       }
       avg = avg / weightVector.length;
+      var avgPounds = 2.20462*avg;
       avg = Math.round( avg * 10 ) / 10;
-      
+      avgPounds = Math.round( avgPounds * 10 ) / 10;
 	  
 	  
 	  var deMeaned_weightVector = new Array();
+	  var deMeaned_weightVectorPounds = new Array();
 	  for (var  i =0; i < weightVector.length; i++){
 		deMeaned_weightVector.push(weightVector[i] - avg);
 	  }
+	  for (var  i =0; i < weightVector.length; i++){
+		deMeaned_weightVectorPounds.push(weightVectorPounds[i] - avgPounds);
+	  }
 	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
+	var dataSetPounds = buildData(weightVectorPounds,dateVector,healthTypeVector);
 	  
 	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
+	var deMeaned_dataSetPounds = buildData(deMeaned_weightVectorPounds,dateVector,healthTypeVector);
       //end of section
     
       //get max and min
@@ -173,7 +186,8 @@ var data = new Array();
           min = weightVector[i];
       }  
     
-      
+      var maxPounds = max*2.20462;
+      var minPounds = min*2.20462;
       
       
      
