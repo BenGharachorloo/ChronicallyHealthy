@@ -202,21 +202,17 @@ var data = new Array();
         //*/
     var actualWeightChart = new CanvasJS.Chart("chartContainer",
     {
-            axisY:[{
+            axisY:{
               title : "Weight (kg)",
               minimum: min - 1,
               maximum: max + 1
-            }],
-            axisY2:[{
-              title : "Weight (lns)",
-              minimum: minPounds - 2.20462,
-              maximum: maxPounds + 2.20462
-            }],
+            },
+           
 	    
       title: {
         text: "Weight Trend"
       },
-        data: [dataSet,dataSetPounds]
+        data: dataSet
     });
       
       
