@@ -4,19 +4,32 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
 <style>
-body {font-family: "Lato", sans-serif; background-color: white;}/*#699d95;*/
+body {font-family: "Lato", sans-serif; background-color: white;}
 
 
-
+.tab { margin-left: 40px; }
 .card {
   /* Add shadows to create the "card" effect */
-  background-color: #DDFFFF;
-  margin-right:5%;
-  font-size: 36px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: #79ada5;
+  transition: 0.3s;
+  font-size: 25px;
+}
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  background-color: #699d95;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+/* Add some padding inside the card container */
+.container {
+	
+  padding: 2px 10% 2px;
+  background-color: #c9ede5;
+  margin-left: 40px;
 }
 
 .bouton{
-  background-color: green;
+  background-color: #699d95;
   border-style: solid;
   border-color: black;
   padding: 15px 32px;
@@ -34,11 +47,10 @@ body {font-family: "Lato", sans-serif; background-color: white;}/*#699d95;*/
   default: #79ada5
   */
 </style>
-
-<script>
-function printPage() {
-  window.print();
-}
+<script>		
+	function printPage() {		
+	  window.print();		
+	}		
 </script>
 </head>
 
@@ -51,14 +63,17 @@ function printPage() {
     <a href="https://bengharachorloo.github.io/ChronicallyHealthy/contacts.html"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
     <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
     <a href="https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
- 	</div>
+ </div>
    <div style = "margin-left:20%;">
-		<div class = "card">
-			   <h1 style="padding-top: 35px;padding-bottom: 35px; text-align:center;">Pre-Doctor's Visit Assessment</h1>
-			<p style="padding: 10px 70px 10px;">This form is a list of questions your physician is likely to ask you at your appointment. Please bring the information with you when you leave. At the bottom, you can click the button to print this page, if you'd prefer. </p>
-		<!--</div>
-		<div class = "card">-->
-			 <div  style = "margin-left:10%; margin-right:10%;">
+   <div class="card" >
+        <div class="container">
+			 <div style="">
+			   <h1 style="padding-top: 35px;padding-bottom: 0px; text-align:center; ">Pre-Doctor's Visit Assessment</h1>
+			   
+			 </div>
+			 <p style="margin-right: 0%;padding-left: 0px; padding-bottom: 10px; ">This form is a list of questions your physician is likely to ask you at your appointment. Please bring the information with you when you leave. At the bottom, you can click the button to print this page, if you'd prefer. </p>
+
+			   <br>
 			   <br>
 			   
 			   <form method="post" action="<?php?>">  
@@ -67,27 +82,29 @@ function printPage() {
 						  <div style=" margin-left: 50px; ">
 							  <input type="radio" name="lastBowelMovement" value="0" checked >  &lt 6 hours ago<br>
 							  <input type="radio" name="lastBowelMovement" value="1"> 6 hours - 24 hours ago <br>
-							  <input type="radio" name="lastBowelMovement" value="2" checked> 24-48 hours ago<br> 
+							  <input type="radio" name="lastBowelMovement" value="2" checked> 24 - 48 hours ago<br> 
 							  <input type="radio" name="lastBowelMovement" value="2" checked> &gt 48 hours ago<br> 
 						  </div>
+						  <br>
 						  <br>
 						   <b>Have you gone through any changes in diet or activity level?  </b><br>
 						  <div style=" margin-left: 50px;">
 							  <input type="radio" name="dietChange" value="1" checked> Yes<br>
 							  <input type="radio" name="dietChange" value="0"> No<br>
 						  </div>
+						  <br>
 					</div>  
 				</form>
 				
-				   <b>Please bring a list of the medication you are taking:  </b><br>
+				   <b>Please bring a list of the medications you are taking:  </b><br>
 					<textarea style="width: 100%; height: 30%;" name="comment" form="usrform"></textarea>
 				  <br><br>
-      				<button onclick="printPage()" class="bouton">Print this page</button>
-
+					<button onclick="printPage()" class="bouton">Print this page</button>	
 			   
 			   <br>
 			   <br>
 			   <br>
+			<!--</div>-->
 			</div>
 		</div>
    </div>
