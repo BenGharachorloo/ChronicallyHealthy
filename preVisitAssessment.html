@@ -4,7 +4,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
 <style>
-body {font-family: "Lato", sans-serif; background-color: #699d95;}
+body {font-family: "Lato", sans-serif; background-color: white;}/*#699d95;*/
 
 
 
@@ -35,6 +35,11 @@ body {font-family: "Lato", sans-serif; background-color: #699d95;}
   */
 </style>
 
+<script>
+function printPage() {
+  window.print();
+}
+</script>
 </head>
 
 <body>
@@ -49,9 +54,8 @@ body {font-family: "Lato", sans-serif; background-color: #699d95;}
  	</div>
    <div style = "margin-left:20%;">
 		<div class = "card">
-			 <div style="">
 			   <h1 style="padding-top: 35px;padding-bottom: 35px; text-align:center;">Pre-Doctor's Visit Assessment</h1>
-			 </div>
+			<p style="padding: 10px 70px 10px;">This form is a list of questions your physician is likely to ask you at your appointment. Please bring the information with you when you leave. At the bottom, you can click the button to print this page, if you'd prefer. </p>
 		<!--</div>
 		<div class = "card">-->
 			 <div  style = "margin-left:10%; margin-right:10%;">
@@ -78,7 +82,8 @@ body {font-family: "Lato", sans-serif; background-color: #699d95;}
 				   <b>Please bring a list of the medication you are taking:  </b><br>
 					<textarea style="width: 100%; height: 30%;" name="comment" form="usrform"></textarea>
 				  <br><br>
-      
+      				<button onclick="printPage()" class="bouton">Print this page</button>
+
 			   
 			   <br>
 			   <br>
