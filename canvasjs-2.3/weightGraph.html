@@ -24,18 +24,28 @@ body {font-family: "Lato", sans-serif;}
     function unhealthyTrend(){
 		
 		var line1 = "Warning: An unhealthy weight trend has been detected, which may be indicative of edema formation. Please contact your physician.";
-		var line2 = "Click here for more information.";
+		var line2 = "Click ";
+		var line3 = "here";
+		var line4 = " for more information.";
 		var para1 = document.createElement("p");
 		var para2 = document.createElement("p");
+		var para3 = document.createElement("a");
+		var para4 = document.createElement("p");
         var line1  = document.createTextNode(line1 );
         var line2  = document.createTextNode(line2);
+        var line3  = document.createTextNode(line3 );
+        var line4  = document.createTextNode(line4);
 		
 		
 		para1.appendChild(line1);
 		para2.appendChild(line2);
+		para3.appendChild(line3);
+		para4.appendChild(line4);
         var warningElem = document.createElement("div");
 	  warningElem.appendChild(para1);
 	  warningElem.appendChild(para2);
+	  warningElem.appendChild(para3);
+	  warningElem.appendChild(para4);
 	  var oldWarningID = document.getElementById("warning");
 	  
 	  
