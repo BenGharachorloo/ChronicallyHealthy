@@ -1,0 +1,194 @@
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
+<style>
+body {font-family: "Lato", sans-serif;}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #c9ede5;
+}
+
+h1   { margin-left:2%; padding: 10px 5px 10px;}
+
+.h1container {background-color: #699d95;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <script>
+    function buildTable(weightVector,dateVector,healthTypeVector,daysSinceReset){
+    
+    var numDays = weightVector.length;
+    
+     for(var i =  numDays-1; i >=0 ; i--){
+        var newRow = document.createElement("TR");
+        // Insert a cell in the row at index 0
+        var newCell  = newRow.insertCell(0);
+		var dateString = dateVector[i]; 
+        // Append a text node to the cell
+        var newText  = document.createTextNode(dateString);
+        newCell.appendChild(newText);
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(1);
+		var weight = weightVector[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(weight);
+        newCell.appendChild(newText);
+	     
+	     
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(2);
+		var healthType = healthTypeVector[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(healthType);
+        newCell.appendChild(newText);
+	     
+	     
+	     
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(3);
+		var daysSince = daysSinceReset[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(daysSince);
+        newCell.appendChild(newText);
+	     
+	     
+  		document.getElementById("weightTable").appendChild(newRow);
+  
+  	}
+    
+    }
+    
+    
+    function makeApiCall() {
+      var params = {
+        // The ID of the spreadsheet to retrieve data from.
+        spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
+        range: 'Test'
+      };
+      var request = gapi.client.sheets.spreadsheets.values.get(params);
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        console.log(response.result);
+        //what to do with result? 
+        //build weight Vector
+        
+        
+          var result =  buildVectors(response.result.values);
+	      
+	  return result;
+        
+        
+        
+        
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      }).then(function(result) {
+	  
+        console.log("bye");
+         dateVector = result[0];
+         weightVector = result[1];
+         healthTypeVector = result[2];
+	 daysSinceReset = result[3];
+	      buildTable(weightVector,dateVector,healthTypeVector,daysSinceReset) ;
+});
+    }
+    function buildVectors(result){
+    
+        var dateVector = new Array();
+        var weightVector = new Array();
+        var healthTypeVector = new Array();
+        var daysSinceReset = new Array();
+        for(var row = 1; row < result.length; row++){//skip one row for title of columns
+          for (var col = 0; col < result[row].length ;col ++){
+            if (col == 0)//the date column
+              dateVector.push(result[row][col]);
+            else if(col == 1)//the weight column
+              weightVector.push(result[row][col]);
+            else if(col == 3)//the weight column
+              healthTypeVector.push(result[row][col]);
+            else if(col == 2)//the weight column
+              daysSinceReset.push(result[row][col]);
+          }
+        }
+      return [dateVector,weightVector,healthTypeVector,daysSinceReset];
+    
+    }
+    function initClient() {
+      var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  
+      var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+      gapi.client.init({
+        'apiKey': API_KEY,
+        'clientId': CLIENT_ID,
+        'scope': SCOPE,
+        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      }).then(function() {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      });
+    }
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+    function updateSignInStatus(isSignedIn) {
+      if (isSignedIn) {
+        makeApiCall();
+      }
+    }
+    function handleSignInClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+    function handleSignOutClick(event) {
+      gapi.auth2.getAuthInstance().signOut();
+    }
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+    <div class="sidebar">
+    
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/contacts.html"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
+  </div>
+   
+  <br>
+  <div style = "margin-left:20%;"> 
+	<div class="h1container">
+		<h1>Weight History </h1>
+	</div>
+  
+  
+    <table id = "weightTable" style="width:100%">
+      <tr style="background-color: #699d95;">
+        <th>Date</th>
+        <th>Weight</th>
+        <th>Health Status</th>
+        <th>Days Since Last Reset / Clinic Visit</th>
+      </tr>
+      
+    </table>
+  </div>
+
+  </body>
+</html>
