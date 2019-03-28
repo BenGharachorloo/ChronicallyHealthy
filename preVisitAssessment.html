@@ -87,30 +87,44 @@ img {
 
 			  <br>
 			</div>
-		</div>
-   <div class="card" >
-        <div class="container">
-			 <form method="post" action="<?php?>">  
+			</div>
+			
+	   <div style="background-color: #c9ede5;">
+			<div class="h1container" style="text-align:center;">
+				<h1> Assessment Form</h1>
+			</div>
+			<div class="aboutPara">
+			
+				<form method="post" action="<?php?>">  
 					<div >
 						  <b>What time was your last bowel movement? </b><br> 
+						  <br>
 						  <div style=" margin-left: 50px; ">
-							  <input type="radio" name="lastBowelMovement" value="0" checked >  &lt 6 hours ago<br>
-							  <input type="radio" name="lastBowelMovement" value="1"> 6 hours - 24 hours ago <br>
+							  <input type="radio" name="lastBowelMovement" value="0" checked >  less than 6 hours ago<br>
+						  <br>
+							  <input type="radio" name="lastBowelMovement" value="1"> 6 - 12 hours ago <br>
+						  <br>
+							  <input type="radio" name="lastBowelMovement" value="1"> 12 - 24 hours ago <br>
+						  <br>
 							  <input type="radio" name="lastBowelMovement" value="2" checked> 24 - 48 hours ago<br> 
-							  <input type="radio" name="lastBowelMovement" value="2" checked> &gt 48 hours ago<br> 
+						  <br>
+							  <input type="radio" name="lastBowelMovement" value="2" checked> more than 48 hours ago<br> 
+						  <br>
 						  </div>
 						  <br>
 						  <br>
 						   <b>Have you gone through any changes in diet or activity level?  </b><br>
+						  <br>
 						  <div style=" margin-left: 50px;">
 							  <input type="radio" name="dietChange" value="1" checked> Yes<br>
+						  <br>
 							  <input type="radio" name="dietChange" value="0"> No<br>
+						  <br>
 						  </div>
 						  <br>
 					</div>  
 				</form>
-				
-				   <b>Please bring a list of the medications you are taking:  </b><br>
+				<b>Please bring a list of the medications you are taking:  </b><br>
 					<textarea style="width: 100%; height: 30%;" name="comment" form="usrform"></textarea>
 				  <br><br>
 					<button onclick="printPage()" class="bouton"><b>Print this page</b></button>	
@@ -118,8 +132,12 @@ img {
 			   <br>
 			   <br>
 			   <br>
-			<!--</div>-->
 			</div>
+			
+			
+			</div>
+			  <br>
+			  <br>
 		</div>
    </div>
 </body>
