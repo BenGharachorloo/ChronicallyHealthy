@@ -6,6 +6,11 @@
 <style>
 body {font-family: "Lato", sans-serif; background-color: white;}
 
+.aboutPara {
+font-size: 22px;
+  margin-right: 10%;
+  margin-left:5%;
+}
 
 .tab { margin-left: 40px; }
 .card {
@@ -40,12 +45,19 @@ body {font-family: "Lato", sans-serif; background-color: white;}
   margin: 4px 2px;
   cursor: pointer;
 }
+.container2 {
+  padding: 2px 16px;
+    background-color: #c9ede5;
+}
+h1   { margin-left:2%; padding: 10px 5px 10px;}
+h2   { margin-left:2%; padding: 10px 5px 10px;}
+h3   { margin-left:2%; padding: 10px 5px 10px;}
+.h1container {background-color: #699d95;}
+img { 
+   border:20px solid #1d3a24;
+    border-radius: 5px 5px 0 0;
+}
 
-
-/*lighter: #D9FdF5
-  darker: #699d95
-  default: #79ada5
-  */
 </style>
 <script>		
 	function printPage() {		
@@ -64,20 +76,21 @@ body {font-family: "Lato", sans-serif; background-color: white;}
     <a href="https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
  </div>
    <div style = "margin-left:20%;">
+	   <div style="background-color: #c9ede5;">
+			<div class="h1container" style="text-align:center;">
+				<h1> Pre-Doctor's Visit Assessment</h1>
+			</div>
+			<div class="aboutPara">
+			  <p>If an unhealthy weight trend has been detected, we advise you to book an appointment with your physician. </p>
+
+			 <p>This form is a list of questions your physician is likely to ask you at your appointment. Please bring the information with you when you leave. At the bottom, you can click the button to print this page, if you'd prefer. </p>
+
+			  <br>
+			</div>
+		</div>
    <div class="card" >
         <div class="container">
-			 <div style="">
-			   <h1 style="padding-top: 35px;padding-bottom: 0px; text-align:center; ">Pre-Doctor's Visit Assessment</h1>
-			   
-			 </div>
-			 <p style="margin-right: 0%;padding-left: 0px; padding-bottom: 10px; ">If an unhealthy weight trend has been detected, we advise you to book an appointment with your physician. </p>
-
-			 <p style="margin-right: 0%;padding-left: 0px; padding-bottom: 10px; ">This form is a list of questions your physician is likely to ask you at your appointment. Please bring the information with you when you leave. At the bottom, you can click the button to print this page, if you'd prefer. </p>
-
-			   <br>
-			   <br>
-			   
-			   <form method="post" action="<?php?>">  
+			 <form method="post" action="<?php?>">  
 					<div >
 						  <b>What time was your last bowel movement? </b><br> 
 						  <div style=" margin-left: 50px; ">
