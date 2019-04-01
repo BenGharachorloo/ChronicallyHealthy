@@ -18,33 +18,37 @@ body {font-family: "Lato", sans-serif;}
 }
 </style>
   <script type="text/javascript" src="canvasjs.min.js"></script>
-	
-	
+  
+  
   <script type="text/javascript">
     function unhealthyTrend(){
-		var line1 = "Warning: weight gain alert. Please contact your physician and";
-		var line2 = "click here for more information.";
-		var para1 = document.createElement("p");
-		var para2 = document.createElement("a");
-        var line1  = document.createTextNode(line1 );
+    var line1 = "Weight Gain Alert."
+    var line2 = "Please contact your physician.";
+    var line3 = "Click here for more information.";
+    var para1 = document.createElement("p");
+    var para2 = document.createElement("p");
+          var para3 = document.createElement("a");
+        var line1  = document.createTextNode(line1);
         var line2  = document.createTextNode(line2);
-        var line3  = document.createTextNode(line3 );
+        var line3  = document.createTextNode(line3);
         var line4  = document.createTextNode(line4);
-		
-		
-		para1.appendChild(line1);
-		para2.appendChild(line2);
-	    	para2.href = "https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html";
-        var warningElem = document.createElement("div");
-	  warningElem.appendChild(para1);
-	  warningElem.appendChild(para2);
-	  var oldWarningID = document.getElementById("warning");
-	  
-	  
-	  parent = oldWarningID.parentNode;
-	  parent.insertBefore(warningElem, oldWarningID);
-	  // Remove the original
-	  parent.removeChild(oldWarningID);//*/
+    
+    
+    para1.appendChild(line1);
+    para2.appendChild(line2);
+    para3.appendChild(line3);
+    para3.href = "https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html";
+    var warningElem = document.createElement("div");
+    warningElem.appendChild(para1);
+    warningElem.appendChild(para2);
+    warningElem.appendChild(para3);
+    var oldWarningID = document.getElementById("warning");
+    
+    
+    parent = oldWarningID.parentNode;
+    parent.insertBefore(warningElem, oldWarningID);
+    // Remove the original
+    parent.removeChild(oldWarningID);//*/
     }
     function healthyTrend(){
       //element
@@ -53,42 +57,42 @@ body {font-family: "Lato", sans-serif;}
         "You have a healthy weight trend. Thank you for monitoring your weight.";
       elem.style.backgroundColor = "#7CF280";
     }
-	  function whichColor(healthType){
-	if(healthType == "Indeterminate")
-    	return "gray"
-	if(healthType == "Healthy")
-    	return "blue"
-	if(healthType == "Unhealthy")
-    	return "red"
+    function whichColor(healthType){
+  if(healthType == "Indeterminate")
+      return "gray"
+  if(healthType == "Healthy")
+      return "blue"
+  if(healthType == "Unhealthy")
+      return "red"
 }
 function buildData(weightVector,dateVector,healthTypeVector){
 var data = new Array();
-	var dataSeries = {};
-	dataSeries.type = "area";
-	dataSeries.color = whichColor(healthTypeVector[0]);
-	dataSeries.dataPoints = new Array();
-	dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
-	data.push(dataSeries);
+  var dataSeries = {};
+  dataSeries.type = "area";
+  dataSeries.color = whichColor(healthTypeVector[0]);
+  dataSeries.dataPoints = new Array();
+  dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
+  data.push(dataSeries);
     j = 0;
-	for(var i = 1; i < weightVector.length; i++){
-	if (healthTypeVector[i] != healthTypeVector[i-1]){
-		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
-		var dataSeries = {};
-		dataSeries.type = "area";
-		dataSeries.color = whichColor(healthTypeVector[i]);
-		dataSeries.dataPoints = new Array();
-		dataSeries.dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
-		data.push(dataSeries);
-	    j++;
-	}
-	else
-		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
-	}
-	return data
-	}
+  for(var i = 1; i < weightVector.length; i++){
+  if (healthTypeVector[i] != healthTypeVector[i-1]){
+    data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+    var dataSeries = {};
+    dataSeries.type = "area";
+    dataSeries.color = whichColor(healthTypeVector[i]);
+    dataSeries.dataPoints = new Array();
+    dataSeries.dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+    data.push(dataSeries);
+      j++;
+  }
+  else
+    data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+  }
+  return data
+  }
        //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
     
-	 
+   
     
         var dateVector;
         var weightVector;
@@ -107,51 +111,51 @@ var data = new Array();
         //what to do with result? 
         //build weight Vector
           var result =  buildVectors(response.result.values);
-	      
-	  return result;
+        
+    return result;
         
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       }).then(function(result) {
-	  
+    
         console.log("bye");
          dateVector = result[0];
          weightVector = result[1];
          healthTypeVector = result[2];
-	      buildGraph(weightVector,dateVector,healthTypeVector) ;
+        buildGraph(weightVector,dateVector,healthTypeVector) ;
 });
     }
-	  
+    
     //window.onload = function 
     function buildGraph(weightVector,dateVector,healthTypeVector) {
-	    //var streetaddress= addy.substr(0, addy.indexOf(',')); 
-	    for (var d = 0; d < dateVector.length; d++){
-	    	dateVector[d] = dateVector[d].substr(0, dateVector[d].indexOf(','));
-	    }//
-	    
-	    for (var d = 0; d < weightVector.length; d++){
-	    	weightVector[d] = parseFloat(weightVector[d], 10);
-	    }
-	    var weightVectorPounds = new Array(weightVector.length);
-	    for (var d = 0; d < weightVector.length; d++){
-	    	weightVectorPounds[d] = 2.20462*weightVector[d];
-	    }
-	    //axisYIndex: 1,
+      //var streetaddress= addy.substr(0, addy.indexOf(',')); 
+      for (var d = 0; d < dateVector.length; d++){
+        dateVector[d] = dateVector[d].substr(0, dateVector[d].indexOf(','));
+      }//
+      
+      for (var d = 0; d < weightVector.length; d++){
+        weightVector[d] = parseFloat(weightVector[d], 10);
+      }
+      var weightVectorPounds = new Array(weightVector.length);
+      for (var d = 0; d < weightVector.length; d++){
+        weightVectorPounds[d] = 2.20462*weightVector[d];
+      }
+      //axisYIndex: 1,
         console.log(dateVector);
         console.log(weightVector);
         console.log(weightVectorPounds);
         console.log(healthTypeVector);//testing console log **hopefully it logs it right
-	      
-	 /* weightVector= [-1,-0.2,-0.2,1.1,1.3,1.25,2.3];
-	for(var i = 0 ; i < weightVector.length; i++){
-		weightVector[i] = weightVector[i] + 70;
-	}  
-	 dateVector = ["Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7"];
-	 healthTypeVector = ["Healthy","Indeterminate","Healthy","Healthy","Healthy","Unhealthy","Unhealthy"];
-		//read the above from a file*/
-	    
-	    
-	  //get avg
+        
+   /* weightVector= [-1,-0.2,-0.2,1.1,1.3,1.25,2.3];
+  for(var i = 0 ; i < weightVector.length; i++){
+    weightVector[i] = weightVector[i] + 70;
+  }  
+   dateVector = ["Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7"];
+   healthTypeVector = ["Healthy","Indeterminate","Healthy","Healthy","Healthy","Unhealthy","Unhealthy"];
+    //read the above from a file*/
+      
+      
+    //get avg
       var avg = 0;
       for (var  i =0; i < weightVector.length; i++){
         avg += weightVector[i];
@@ -160,22 +164,22 @@ var data = new Array();
       var avgPounds = 2.20462*avg;
       avg = Math.round( avg * 10 ) / 10;
       avgPounds = Math.round( avgPounds * 10 ) / 10;
-	  
-	  
-	  var deMeaned_weightVector = new Array();
-	  var deMeaned_weightVectorPounds = new Array();
-	  for (var  i =0; i < weightVector.length; i++){
-		deMeaned_weightVector.push(weightVector[i] - avg);
-	  }
-	  for (var  i =0; i < weightVector.length; i++){
-		deMeaned_weightVectorPounds.push(weightVectorPounds[i] - avgPounds);
-	  }
-	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
-	var dataSetPounds = buildData(weightVectorPounds,dateVector,healthTypeVector);
-	dataSetPounds.axisYIndex = 1;
-	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
-	var deMeaned_dataSetPounds = buildData(deMeaned_weightVectorPounds,dateVector,healthTypeVector);
-	deMeaned_dataSetPounds.axisYIndex = 1;
+    
+    
+    var deMeaned_weightVector = new Array();
+    var deMeaned_weightVectorPounds = new Array();
+    for (var  i =0; i < weightVector.length; i++){
+    deMeaned_weightVector.push(weightVector[i] - avg);
+    }
+    for (var  i =0; i < weightVector.length; i++){
+    deMeaned_weightVectorPounds.push(weightVectorPounds[i] - avgPounds);
+    }
+  var dataSet = buildData(weightVector,dateVector,healthTypeVector);
+  var dataSetPounds = buildData(weightVectorPounds,dateVector,healthTypeVector);
+  dataSetPounds.axisYIndex = 1;
+  var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
+  var deMeaned_dataSetPounds = buildData(deMeaned_weightVectorPounds,dateVector,healthTypeVector);
+  deMeaned_dataSetPounds.axisYIndex = 1;
       //end of section
     
       //get max and min
@@ -195,11 +199,11 @@ var data = new Array();
       
      
       //highlight the unhealthy area
-     	if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
-	       unhealthyTrend();//change back later to unhealthy
-	}
-    	else{
-		healthyTrend();
+      if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
+         unhealthyTrend();//change back later to unhealthy
+  }
+      else{
+    healthyTrend();
         }
         //*/
     var actualWeightChart = new CanvasJS.Chart("chartContainer",
@@ -210,7 +214,7 @@ var data = new Array();
               maximum: max + 1
             },
            
-	    
+      
       title: {
         text: "Weight Trend"
       },
@@ -231,11 +235,11 @@ var data = new Array();
     });
     actualWeightChart.render();
     deMeanedChart.render();
-	    
+      
         console.log(dataSet);
         console.log(actualWeightChart);
   }
-	  
+    
     function buildVectors(result){
     
         var dateVector = new Array();
@@ -300,12 +304,12 @@ var data = new Array();
   </div>
     <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
       <div id="warning" >
-        <p>Warning: weight gain alert. Please contact your physician and click here for more information.</p>
+        <p>Weight Gain Alert. Please contact your physician and click here for more information.</p>
       </div>
     </div>
   <br>
   <br>
-	
+  
         <p>Warning:</p>
   <div style = "margin-left:20%;">
     <div>
