@@ -1,103 +1,134 @@
 <html>
-<head>
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
 <style>
-body {font-family: "Lato", sans-serif; background-color: white;}
-
-.aboutPara {
-font-size: 22px;
-  margin-right: 10%;
-  margin-left:5%;
+body {font-family: "Lato", sans-serif;}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
-
-.tab { margin-left: 40px; }
-.card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-color: #79ada5;
-  transition: 0.3s;
-  font-size: 25px;
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  background-color: #699d95;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
-/* Add some padding inside the card container */
-.container {
-	
-  padding: 2px 10% 2px;
-  background-color: #c9ede5;
-  margin-left: 40px;
-}
-
-.bouton{
-  background-color: #699d95;
-  border-style: solid;
-  border-color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-.container2 {
-  padding: 2px 16px;
-    background-color: #c9ede5;
-}
-h1   { margin-left:2%; padding: 10px 5px 10px;}
-h2   { margin-left:2%; padding: 10px 5px 10px;}
-h3   { margin-left:2%; padding: 10px 5px 10px;}
-.h1container {background-color: #699d95;}
-img { 
-   border:20px solid #1d3a24;
-    border-radius: 5px 5px 0 0;
-}
-
 </style>
-<script>		
-	function printPage() {		
-	  window.print();		
-	}		
-</script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
 
-    <script>    
+    <script>
+    function buildTable(weightVector,dateVector,healthTypeVector,daysSinceReset){
+    
+    var numDays = weightVector.length;
+    
+     for(var i =  0; i < numDays ; i++){
+        var newRow = document.createElement("TR");
+        // Insert a cell in the row at index 0
+        var newCell  = newRow.insertCell(0);
+		var dateString = dateVector[i]; 
+        // Append a text node to the cell
+        var newText  = document.createTextNode(dateString);
+        newCell.appendChild(newText);
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(1);
+		var weight = weightVector[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(weight);
+        newCell.appendChild(newText);
+	     
+	     
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(2);
+		var healthType = healthTypeVector[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(healthType);
+        newCell.appendChild(newText);
+	     
+	     
+	     
+        // Insert a cell in the row at index 0
+         newCell  = newRow.insertCell(3);
+		var daysSince = daysSinceReset[i]; 
+        // Append a text node to the cell
+        //weightVector[t].toString()
+         newText  = document.createTextNode(daysSince);
+        newCell.appendChild(newText);
+	     
+	     
+  		document.getElementById("weightTable").appendChild(newRow);
+  
+  	}
+    
+    }
+    
+    
     function makeApiCall() {
       var params = {
+        // The ID of the spreadsheet to retrieve data from.
         spreadsheetId: '1AoHa9a-JLxcu5Kf_QeXdCtAGFR-m-gaz3Dj8Xkrx3Lc',  
-        range: 'H1',
-        valueInputOption: 'RAW',
+        range: 'Test'
       };
-
-      var valueRangeBody = {
-		 "values": [
-		    [
-		      "Reset requested!"
-		    ]
-		  ]
-      };
-
-      var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
+      var request = gapi.client.sheets.spreadsheets.values.get(params);
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
+        //what to do with result? 
+        //build weight Vector
+        
+        
+          var result =  buildVectors(response.result.values);
+	      
+	  return result;
+        
+        
+        
+        
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
-      });
+      }).then(function(result) {
+	  
+        console.log("bye");
+         dateVector = result[0];
+         weightVector = result[1];
+         healthTypeVector = result[2];
+	 daysSinceReset = result[3];
+	      buildTable(weightVector,dateVector,healthTypeVector,daysSinceReset) ;
+});
     }
-
+    function buildVectors(result){
+    
+        var dateVector = new Array();
+        var weightVector = new Array();
+        var healthTypeVector = new Array();
+        var daysSinceReset = new Array();
+        for(var row = 1; row < result.length; row++){//skip one row for title of columns
+          for (var col = 0; col < result[row].length ;col ++){
+            if (col == 0)//the date column
+              dateVector.push(result[row][col]);
+            else if(col == 1)//the weight column
+              weightVector.push(result[row][col]);
+            else if(col == 3)//the weight column
+              healthTypeVector.push(result[row][col]);
+            else if(col == 2)//the weight column
+              daysSinceReset.push(result[row][col]);
+          }
+        }
+      return [dateVector,weightVector,healthTypeVector,daysSinceReset];
+    
+    }
     function initClient() {
       var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  
       var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  
-      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
       gapi.client.init({
         'apiKey': API_KEY,
         'clientId': CLIENT_ID,
@@ -127,83 +158,29 @@ img {
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-
-
-
     <div class="sidebar">
     
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/realWeightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/realWeightHistoryBACKUP.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
-    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
- </div>
+    <a href="http://localhost/ChronicallyHealthy/canvasjs-2.3/weightGraph.php"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="http://localhost/ChronicallyHealthy/weightHistory.php"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="http://localhost/ChronicallyHealthy/preVisitAssessment.php"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="http://localhost/ChronicallyHealthy/contacts.php"><i class="fa fa-fw fa-envelope"></i> Contacts</a>
+    <a href="http://localhost/ChronicallyHealthy/about.php"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="http://localhost/ChronicallyHealthy/userGuide.php"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
+  </div>
+   
+  <br>
+  <br>
+  <div style = "margin-left:20%;"> 
+    <table id = "weightTable" style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Weight</th>
+        <th>Health Status</th>
+        <th>Days Since Last Reset / Clinic Visit</th>
+      </tr>
+      
+    </table>
+  </div>
 
-   <div style = "margin-left:20%;">
-	   <div style="background-color: #c9ede5;">
-			<div class="h1container" style="text-align:center;">
-				<h1> Pre-Doctor's Visit Assessment</h1>
-			</div>
-			<div class="aboutPara">
-			  <p>If an unhealthy weight trend has been detected, we advise you to book an appointment with your doctor. This form is a list of questions your doctor is likely to ask you at your appointment. Please bring the information with you when you leave. At the bottom, you can click the button to print this page. </p>
-
-			  After your visit with the doctor, please click the button below to reanalyze your weights.
-			  <br><br>
-			  <button onclick="makeApiCall()" class="bouton"><b>Reset my weight trend</b></button>	
-			  <br> <br>
-			</div>
-			</div>
-			
-	   <div style="background-color: #c9ede5;">
-			<div class="h1container" style="text-align:center;">
-				<h1> Assessment Form</h1>
-			</div>
-			<div class="aboutPara">
-			
-				<form method="post" action="<?php?>">  
-					<div >
-						  <b>What time was your last bowel movement? </b><br> 
-						  <br>
-						  <div style=" margin-left: 50px; ">
-							  <input type="radio" name="lastBowelMovement" value="0" checked >  less than 6 hours ago<br>
-						  <br>
-							  <input type="radio" name="lastBowelMovement" value="1"> 6 - 12 hours ago <br>
-						  <br>
-							  <input type="radio" name="lastBowelMovement" value="1"> 12 - 24 hours ago <br>
-						  <br>
-							  <input type="radio" name="lastBowelMovement" value="2" checked> 24 - 48 hours ago<br> 
-						  <br>
-							  <input type="radio" name="lastBowelMovement" value="2" checked> more than 48 hours ago<br> 
-						  <br>
-						  </div>
-						  <br>
-						  <br>
-						   <b>Have you experienced any changes in diet or activity level?  </b><br>
-						  <br>
-						  <div style=" margin-left: 50px;">
-							  <input type="radio" name="dietChange" value="1" checked> Yes<br>
-						  <br>
-							  <input type="radio" name="dietChange" value="0"> No<br>
-						  <br>
-						  </div>
-						  <br>
-					</div>  
-				</form>
-				<b>What are the medications you are taking?  </b><br>
-					<textarea style="width: 100%; height: 30%;" name="comment" form="usrform"></textarea>
-				  <br><br>
-					<button onclick="printPage()" class="bouton"><b>Print this page</b></button>	
-			   
-			   <br>
-			   <br>
-			   <br>
-			</div>
-			
-			
-			</div>
-			  <br>
-			  <br>
-		</div>
-   </div>
-</body>
+  </body>
 </html>
