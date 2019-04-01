@@ -80,7 +80,7 @@
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
     }
-      //this.onload=function(){};
+      //
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
       
@@ -89,7 +89,7 @@
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
     <br>
-    <button onclick="handleClientLoad()">Update thingy</button>
+    <button onclick="this.onload=function(){};handleClientLoad()">Update thingy</button>
     <p>doo doodoo dooo</p>
   </body>
 </html>
