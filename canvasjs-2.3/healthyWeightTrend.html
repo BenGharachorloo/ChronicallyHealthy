@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
+<style>
+body {font-family: "Lato", sans-serif;}
+  
+.warningStyle {
+  font-size: 36px;
+  font-weight: bold;
+  color: #000000;
+  padding: 0px 10px;
+  background-color:#F2807C;
+  margin-left: 15%;
+  
+}
+</style>
+  <script type="text/javascript" src="canvasjs.min.js"></script>
+	
+	
+  <script type="text/javascript">
+    function unhealthyTrend(){
+		
+		var line1 = "Warning: Unhealthy Weight Increase Alert. Please contact your physician.";
+	    	var line2 = "Click here for more information.";
+		var para1 = document.createElement("p");
+		var para2 = document.createElement("a");
+        var line1  = document.createTextNode(line1 );
+        var line2  = document.createTextNode(line2);
+        var line3  = document.createTextNode(line3 );
+        var line4  = document.createTextNode(line4);
+		
+		
+		para1.appendChild(line1);
+		para2.appendChild(line2);
+	    	para2.href = "https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html";
+        var warningElem = document.createElement("div");
+	  warningElem.appendChild(para1);
+	  warningElem.appendChild(para2);
+	  var oldWarningID = document.getElementById("warning");
+	  
+	  
+	  parent = oldWarningID.parentNode;
+	  parent.insertBefore(warningElem, oldWarningID);
+	  // Remove the original
+	  parent.removeChild(oldWarningID);//*/
+    }
+    function healthyTrend(){
+      //element
+      var elem = document.getElementById("warningContainer")
+      elem.innerHTML = 
+        "You have a healthy weight trend. Thank you for monitoring your weight.";
+      elem.style.backgroundColor = "#7CF280";
+    }
+	  function whichColor(healthType){
+	if(healthType == "Indeterminate")
+    	return "gray"
+	if(healthType == "Healthy")
+    	return "blue"
+	if(healthType == "Unhealthy")
+    	return "red"
+}
+function buildData(weightVector,dateVector,healthTypeVector){
+var data = new Array();
+	var dataSeries = {};
+	dataSeries.type = "area";
+	dataSeries.color = whichColor(healthTypeVector[0]);
+	dataSeries.dataPoints = new Array();
+	dataSeries.dataPoints.push({label:dateVector[0],x:0,y:weightVector[0]});
+	data.push(dataSeries);
+    j = 0;
+	for(var i = 1; i < weightVector.length; i++){
+	if (healthTypeVector[i] != healthTypeVector[i-1]){
+		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+		var dataSeries = {};
+		dataSeries.type = "area";
+		dataSeries.color = whichColor(healthTypeVector[i]);
+		dataSeries.dataPoints = new Array();
+		dataSeries.dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+		data.push(dataSeries);
+	    j++;
+	}
+	else
+		data[j].dataPoints.push({label:dateVector[i],x:i,y:weightVector[i]});
+	}
+	return data
+	}
+       //over here, we just read from a file, i.e. this code won't exist once we have the data from another form
+    
+	 
+    
+        var dateVector;
+        var weightVector;
+        var healthTypeVector;
+     window.onload = function()  {
+	  
+        console.log("bye");
+	      buildGraph(weightVector,dateVector,healthTypeVector) ;
+    }
+	  
+    //window.onload = function 
+    function buildGraph(weightVector,dateVector,healthTypeVector) {
+		
+		var N = 30;
+		avgWeight = 70;
+		weightVector = new Array(N);
+		dateVector = new Array(N);
+		healthTypeVector = new Array(N);
+		/*70.6
+70.9
+71
+71.6
+71.8
+72.3
+*/
+		
+	    for (var d = 0; d < dateVector.length; d++){
+	    	dateVector[d] = "March " + (d + 1) + ",";
+	    }//
+	    
+	    for (var d = 0; d < weightVector.length - 6; d++){
+	    	weightVector[d] = avgWeight + (Math.random()*0.3)-0.15;
+	    }
+		//UNHEALTHY SECTION
+	    	weightVector[N - 1- 5] = 70.1;
+	    	weightVector[N - 1- 4] = 70.05;
+	    	weightVector[N - 1- 3] = 71;
+	    	weightVector[N - 1- 2] = 70.8;
+	    	weightVector[N - 1- 1] = 70.6;
+	    	weightVector[N - 1- 0] = 70.3;
+	    
+		
+	    for (var d = 0; d < weightVector.length; d++){
+			if(d <= 6)
+				healthTypeVector[d] = "Indeterminate";
+			else if(d <= N - 8)
+				healthTypeVector[d] = "Healthy";
+			else
+				healthTypeVector[d] = "Healthy";
+	    }
+		/*REMOVE THIS - USED ONLY FOR SURVEY RESULTS*/
+		
+        console.log(dateVector);
+        console.log(weightVector);
+        console.log(weightVectorPounds);
+		
+		
+	    //var streetaddress= addy.substr(0, addy.indexOf(',')); 
+	    for (var d = 0; d < dateVector.length; d++){
+	    	dateVector[d] = dateVector[d].substr(0, dateVector[d].indexOf(','));
+	    }//
+	    
+	    for (var d = 0; d < weightVector.length; d++){
+	    	weightVector[d] = parseFloat(weightVector[d], 10);
+	    }
+	    var weightVectorPounds = new Array(weightVector.length);
+	    for (var d = 0; d < weightVector.length; d++){
+	    	weightVectorPounds[d] = 2.20462*weightVector[d];
+	    }
+	    //axisYIndex: 1,
+        console.log(healthTypeVector);//testing console log **hopefully it logs it right
+	      
+	 
+	    
+	    
+	  //get avg
+      var avg = 0;
+      for (var  i =0; i < weightVector.length; i++){
+        avg += weightVector[i];
+      }
+      avg = avg / weightVector.length;
+      var avgPounds = 2.20462*avg;
+      avg = Math.round( avg * 10 ) / 10;
+      avgPounds = Math.round( avgPounds * 10 ) / 10;
+	  
+	  
+	  var deMeaned_weightVector = new Array();
+	  var deMeaned_weightVectorPounds = new Array();
+	  for (var  i =0; i < weightVector.length; i++){
+		deMeaned_weightVector.push(weightVector[i] - avg);
+	  }
+	  for (var  i =0; i < weightVector.length; i++){
+		deMeaned_weightVectorPounds.push(weightVectorPounds[i] - avgPounds);
+	  }
+	var dataSet = buildData(weightVector,dateVector,healthTypeVector);
+	var dataSetPounds = buildData(weightVectorPounds,dateVector,healthTypeVector);
+	dataSetPounds.axisYIndex = 1;
+	var deMeaned_dataSet = buildData(deMeaned_weightVector,dateVector,healthTypeVector);
+	var deMeaned_dataSetPounds = buildData(deMeaned_weightVectorPounds,dateVector,healthTypeVector);
+	deMeaned_dataSetPounds.axisYIndex = 1;
+      //end of section
+    
+      //get max and min
+    var max = weightVector[0];
+    var min = weightVector[0];
+    
+      for(var i = 1 ; i < weightVector.length; i++){
+        if(max < weightVector[i])
+          max = weightVector[i];
+        if(min > weightVector[i])
+          min = weightVector[i];
+      }  
+    
+      var maxPounds = max*2.20462;
+      var minPounds = min*2.20462;
+      
+      
+     
+      //highlight the unhealthy area
+     	if (healthTypeVector[healthTypeVector.length-1] == "Unhealthy" ) {
+	       unhealthyTrend();//change back later to unhealthy
+	}
+    	else{
+		healthyTrend();
+        }
+        //*/
+    var actualWeightChart = new CanvasJS.Chart("chartContainer",
+    {
+            axisY:{
+              title : "Weight (kg)",
+              minimum: min - 1,
+              maximum: max + 1
+            },
+           
+	    
+      title: {
+        text: "Weight Trend"
+      },
+        data: dataSet
+    });
+      
+      
+      
+      var deMeanedChart = new CanvasJS.Chart("chartContainerDeMeaned",
+    {
+            axisY:{
+              title : "Weight (kg)"
+            },
+      title: {
+        text: "Change in Weight"
+      },
+        data: deMeaned_dataSet
+    });
+    actualWeightChart.render();
+    deMeanedChart.render();
+	    
+        console.log(dataSet);
+        console.log(actualWeightChart);
+  }
+	  
+    function buildVectors(result){
+    
+        var dateVector = new Array();
+        var weightVector = new Array();
+        var healthTypeVector = new Array();
+        for(var row = 1; row < result.length; row++){//skip one row for title of columns
+          for (var col = 0; col < result[row].length ;col ++){
+            if (col == 0)//the date column
+              dateVector.push(result[row][col]);
+            else if(col == 1)//the weight column
+              weightVector.push(result[row][col]);
+            else if(col == 3)//the weight column
+              healthTypeVector.push(result[row][col]);
+          }
+        }
+      return [dateVector,weightVector,healthTypeVector];
+    
+    }
+    
+    </script>
+   
+</head>
+ 
+<body>
+  <div class="sidebar">
+    <a><i class="fa fa-fw fa-heartbeat"></i><b> Edem<font color="red">Alert</font></b></a><br>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/weightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/weightHistory.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
+  </div>
+    <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
+      <div id="warning" >
+           </div>
+    </div>
+  <br>
+  <br>
+	
+        <p>Warning:</p>
+  <div style = "margin-left:20%;">
+    <div>
+      <div id="chartContainer" style="height: 500px; width: 90%;"></div>
+      <br>
+      <br>
+      <div id="chartContainerDeMeaned" style="height: 500px; width: 90%;"></div>
+    </div>
+  </div>
+</body>
+</html>
