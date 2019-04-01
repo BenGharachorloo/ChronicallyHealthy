@@ -25,10 +25,14 @@
         valueInputOption: 'INPUT_VALUE_OPTION_UNSPECIFIED',  // TODO: Update placeholder value.
       };
 
-      var valueRangeBody = {
-        // TODO: Add desired properties to the request body. All existing properties
-        // will be replaced.
-      };
+      var valueRangeBody = 
+        {
+  "range": "Test!F10",
+  "values": [
+    1234
+  ]
+}
+      ;
 
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
@@ -85,5 +89,7 @@
     </script>
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+    <br>
+    <p>lelel</p>
   </body>
 </html>
