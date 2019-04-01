@@ -26,9 +26,9 @@
       };
 
       var valueRangeBody = {
-        "range": 'Test!F10',
+        "range": 'Test!F11',
         "values": [
-          [123]
+          [456]
         ]
       };
 
@@ -80,14 +80,16 @@
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
     }
+      //this.onload=function(){};
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
+      
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
     <br>
+    <button onclick="handleClientLoad()">Update thingy</button>
     <p>doo doodoo dooo</p>
   </body>
 </html>
