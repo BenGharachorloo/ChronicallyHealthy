@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="/ChronicallyHealthy/sidebar.css">
 <style>
 body {font-family: "Lato", sans-serif; background-color: white;}
@@ -65,7 +65,7 @@ img {
 	}		
 </script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -85,7 +85,6 @@ img {
 
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
       request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
         console.log(response.result);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
@@ -95,12 +94,12 @@ img {
     function initClient() {
       var API_KEY = 'AIzaSyD3_zFfVM96fe07g5W33KFH_AGT37LFuwQ';  
       var CLIENT_ID = '558090540727-1vnp83daivae05trl3u5vu1h5cke018t.apps.googleusercontent.com';  
-      var SCOPE = '//www.googleapis.com/auth/spreadsheets';
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
       gapi.client.init({
         'apiKey': API_KEY,
         'clientId': CLIENT_ID,
         'scope': SCOPE,
-        'discoveryDocs': ['//sheets.googleapis.com/$discovery/rest?version=v4'],
+        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
       }).then(function() {
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
         updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
@@ -123,8 +122,8 @@ img {
     </script>
 
 
-    <script src="//apis.google.com/js/api.js"></script>
-<!--     <script async defer src="//apis.google.com/js/api.js"
+    <script src="https://apis.google.com/js/api.js"></script>
+<!--     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script> -->
@@ -132,11 +131,11 @@ img {
 
     <div class="sidebar">
     
-    <a href="//bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/realWeightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
-    <a href="//bengharachorloo.github.io/ChronicallyHealthy/realWeightHistoryBACKUP.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
-    <a href="//bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
-    <a href="//bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
-    <a href="//bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/canvasjs-2.3/realWeightGraph.html"><i class="fa fa-fw fa-line-chart"></i> Weight Trend</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/realWeightHistoryBACKUP.html"><i class="fa fa-fw fa-history"></i> Weight History</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html"><i class="fa fa-fw fa-hospital-o"></i> Doctor's Visits</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/about.html"><i class="fa fa-fw fa-info-circle"></i> About</a>
+    <a href="https://bengharachorloo.github.io/ChronicallyHealthy/userGuide.html"><i class="fa fa-fw fa-question-circle"></i> User Guide</a>
  </div>
 
    <div style = "margin-left:20%;">
