@@ -22,30 +22,33 @@ body {font-family: "Lato", sans-serif;}
 	
   <script type="text/javascript">
     function unhealthyTrend(){
-		
-		var line1 = "Warning: weight gain alert. Please contact your physician and";
-		var line2 = "click here for more information.";
-		var para1 = document.createElement("p");
-		var para2 = document.createElement("a");
-        var line1  = document.createTextNode(line1 );
+    var line1 = "Weight Gain Alert."
+    var line2 = "Please contact your physician.";
+    var line3 = "Click here for more information.";
+    var para1 = document.createElement("p");
+    var para2 = document.createElement("p");
+          var para3 = document.createElement("a");
+        var line1  = document.createTextNode(line1);
         var line2  = document.createTextNode(line2);
-        var line3  = document.createTextNode(line3 );
+        var line3  = document.createTextNode(line3);
         var line4  = document.createTextNode(line4);
-		
-		
-		para1.appendChild(line1);
-		para2.appendChild(line2);
-	    	para2.href = "https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html";
-        var warningElem = document.createElement("div");
-	  warningElem.appendChild(para1);
-	  warningElem.appendChild(para2);
-	  var oldWarningID = document.getElementById("warning");
-	  
-	  
-	  parent = oldWarningID.parentNode;
-	  parent.insertBefore(warningElem, oldWarningID);
-	  // Remove the original
-	  parent.removeChild(oldWarningID);//*/
+    
+    
+    para1.appendChild(line1);
+    para2.appendChild(line2);
+    para3.appendChild(line3);
+    para3.href = "https://bengharachorloo.github.io/ChronicallyHealthy/preVisitAssessment.html";
+    var warningElem = document.createElement("div");
+    warningElem.appendChild(para1);
+    warningElem.appendChild(para2);
+    warningElem.appendChild(para3);
+    var oldWarningID = document.getElementById("warning");
+    
+    
+    parent = oldWarningID.parentNode;
+    parent.insertBefore(warningElem, oldWarningID);
+    // Remove the original
+    parent.removeChild(oldWarningID);//*/
     }
     function healthyTrend(){
       //element
@@ -232,7 +235,7 @@ var data = new Array();
            
 	    
       title: {
-        text: "Weight Trend"
+        text: "Recent Weights"
       },
         data: dataSet
     });
@@ -245,7 +248,7 @@ var data = new Array();
               title : "Weight (kg)"
             },
       title: {
-        text: "Change in Weight"
+        text: "Recent Weight Changes"
       },
         data: deMeaned_dataSet
     });
@@ -290,7 +293,7 @@ var data = new Array();
   </div>
     <div id="warningContainer" class = "warningStyle" style = " text-align: center; ">
       <div id="warning" >
-        Warning: weight gain alert. Please contact your physician and click here for more information.
+       
       </div>
     </div>
   <br>
